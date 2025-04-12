@@ -10,24 +10,18 @@
   <meta name="description" content="YM Bakery's - Panadería artesanal especializada en cupcakes, pasteles y postres para ocasiones especiales en Cotuí.">
   <meta name="theme-color" content="#f9f2e7">
   <title>YM Bakery's - Donde los dulces sueños cobran vida 🧁✨</title>
-
   <!-- Favicon -->
   <link rel="icon" href="https://i.imgur.com/p7mBpVN.png" type="image/png">
-  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
   <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.css" rel="stylesheet">
-  
   <!-- Font Awesome Icons -->
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
-  
   <style>
     :root {
       --color-primary: #8a5a44;
@@ -37,62 +31,49 @@
       --color-accent: #fdd1b9;
       --color-whatsapp: #25d366;
     }
-    
     html {
       scroll-behavior: smooth;
     }
-    
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--color-background);
       color: var(--color-text);
       line-height: 1.6;
     }
-    
     .bg-primary {
       background-color: var(--color-primary);
     }
-    
     .text-primary {
       color: var(--color-primary);
     }
-    
     .text-secondary {
       color: var(--color-secondary);
     }
-    
     .bg-gradient-bakery {
       background: linear-gradient(135deg, #ffebc4, #fdd1b9);
     }
-    
     .cta-button {
       background-color: var(--color-whatsapp);
       transition: all 0.3s ease;
     }
-    
     .cta-button:hover {
       background-color: #1da851;
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
     .social-icon {
       transition: all 0.3s ease;
     }
-    
     .social-icon:hover {
       transform: scale(1.2);
     }
-    
     .product-card {
       transition: all 0.3s ease;
     }
-    
     .product-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(138, 90, 68, 0.1);
     }
-    
     /* Estilos para impresión/PDF */
     @media print {
       body {
@@ -100,12 +81,10 @@
         margin: 0;
         padding: 0;
       }
-      
       section {
         page-break-inside: avoid;
         margin-bottom: 2rem;
       }
-      
       .no-print {
         display: none;
       }
@@ -119,7 +98,6 @@
     <img src="https://i.imgur.com/p7mBpVN.png" alt="Logo de YM Bakery's" class="w-40 md:w-48 h-auto my-4" data-aos="zoom-in" data-aos-delay="600">
     <p class="text-lg md:text-xl max-w-2xl text-center" data-aos="fade-up" data-aos-delay="900">Un rincón dulce donde cada bocado es una experiencia única.</p>
   </header>
-
   <!-- Barra de navegación -->
   <nav class="bg-white shadow-md py-4 sticky top-0 z-50 no-print" data-aos="fade-down" data-aos-duration="800">
     <div class="container mx-auto px-4 flex justify-center">
@@ -131,13 +109,11 @@
       </ul>
     </div>
   </nav>
-
   <!-- Contenido Principal -->
   <main class="container mx-auto px-4 py-8">
     <!-- Sección Nosotros -->
     <section id="nosotros" class="my-12 md:my-16" data-aos="fade-up" data-aos-offset="200">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8" data-aos="fade-right" data-aos-delay="300">¿Qué nos hace especiales?</h2>
-      
       <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
         <p class="text-lg mb-4" data-aos="fade-left" data-aos-delay="600">
           Somos una <span class="text-secondary font-semibold">panadería artesanal</span> dedicada a crear los más deliciosos cupcakes, pasteles y postres. Perfectos para cualquier ocasión especial, combinamos sabor, creatividad y amor en cada creación.
@@ -145,7 +121,6 @@
         <p class="text-lg mb-8" data-aos="fade-right" data-aos-delay="900">
           Desde un antojo hasta la mesa de tu celebración, en YM Bakery's convertimos tus dulces sueños en realidad.
         </p>
-        
         <div class="flex justify-center" data-aos="flip-left" data-aos-delay="1200">
           <a href="https://wa.me/18298352169" target="_blank" class="cta-button px-6 py-3 rounded-full text-white font-medium flex items-center">
             <i class="fab fa-whatsapp mr-2 text-xl"></i> Contáctanos por WhatsApp
@@ -153,11 +128,9 @@
         </div>
       </div>
     </section>
-    
     <!-- Sección Productos -->
     <section id="productos" class="my-12 md:my-16" data-aos="fade-up">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Nuestros Productos</h2>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Producto 1 -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
@@ -167,7 +140,6 @@
             <p class="text-gray-700">Deliciosos cupcakes decorados artesanalmente para cualquier ocasión. ¡Personaliza tus sabores y diseños favoritos!</p>
           </div>
         </div>
-        
         <!-- Producto 2 -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="400">
           <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pasteles para celebraciones" class="w-full h-56 object-cover">
@@ -176,7 +148,6 @@
             <p class="text-gray-700">Pasteles únicos para tus momentos especiales. Elaborados con ingredientes frescos y decoraciones personalizadas.</p>
           </div>
         </div>
-        
         <!-- Producto 3 -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="600">
           <img src="https://images.unsplash.com/photo-1514066558159-fc8c737ef259?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Postres variados" class="w-full h-56 object-cover">
@@ -187,11 +158,9 @@
         </div>
       </div>
     </section>
-    
     <!-- Sección Menú -->
     <section id="menu" class="my-12 md:my-16" data-aos="fade-up">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Nuestro Menú</h2>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Flan Tradicional y de Chocolate -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
@@ -219,7 +188,6 @@
             </ul>
           </div>
         </div>
-        
         <!-- Chocoflan -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="300">
           <div class="bg-gradient-bakery p-4 text-center">
@@ -238,7 +206,6 @@
             </ul>
           </div>
         </div>
-        
         <!-- Brownies -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="400">
           <div class="bg-gradient-bakery p-4 text-center">
@@ -261,7 +228,6 @@
             </ul>
           </div>
         </div>
-        
         <!-- Tres Leches -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="500">
           <div class="bg-gradient-bakery p-4 text-center">
@@ -280,7 +246,6 @@
             </ul>
           </div>
         </div>
-        
         <!-- Galletas -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="600">
           <div class="bg-gradient-bakery p-4 text-center">
@@ -307,7 +272,6 @@
             </ul>
           </div>
         </div>
-        
         <!-- Deditos -->
         <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="700">
           <div class="bg-gradient-bakery p-4 text-center">
@@ -327,12 +291,16 @@
           </div>
         </div>
       </div>
+      <!-- Botón Pedir Ahora -->
+      <div class="flex justify-center mt-8" data-aos="fade-up" data-aos-delay="800">
+        <a href="https://wa.me/18298352169" target="_blank" class="cta-button px-8 py-4 rounded-full text-white font-bold text-lg flex items-center">
+          <i class="fab fa-whatsapp mr-3 text-xl"></i> Haz tu pedido ahora
+        </a>
+      </div>
     </section>
-    
     <!-- Sección Testimonios -->
     <section class="my-12 md:my-16 bg-white rounded-xl shadow-lg p-6 md:p-8" data-aos="fade-up">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Lo que dicen nuestros clientes</h2>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Testimonio 1 -->
         <div class="bg-gradient-bakery p-6 rounded-lg" data-aos="fade-right" data-aos-delay="200">
@@ -348,7 +316,6 @@
           <p class="italic text-gray-800">"Los cupcakes más deliciosos que he probado. La textura, el sabor y la decoración son perfectos. Definitivamente mi lugar favorito para endulzar cualquier ocasión especial."</p>
           <p class="font-semibold mt-3 text-primary">- María González</p>
         </div>
-        
         <!-- Testimonio 2 -->
         <div class="bg-gradient-bakery p-6 rounded-lg" data-aos="fade-left" data-aos-delay="400">
           <div class="flex items-center mb-4">
@@ -365,11 +332,9 @@
         </div>
       </div>
     </section>
-    
     <!-- Sección Contacto -->
     <section id="contacto" class="my-12 md:my-16" data-aos="fade-up">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Contáctanos</h2>
-      
       <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
         <div class="flex flex-col md:flex-row">
           <div class="w-full md:w-1/2 mb-8 md:mb-0" data-aos="fade-right" data-aos-delay="300">
@@ -382,7 +347,6 @@
                   <a href="tel:+18298352169" class="text-primary hover:underline">829-835-2169</a>
                 </div>
               </div>
-              
               <div class="flex items-start">
                 <i class="fas fa-map-marker-alt text-secondary mr-3 mt-1"></i>
                 <div>
@@ -391,7 +355,6 @@
 María Peña, Cotuí, República Dominicana</a>
                 </div>
               </div>
-              
               <div class="flex items-start">
                 <i class="fab fa-instagram text-secondary mr-3 mt-1"></i>
                 <div>
@@ -399,7 +362,6 @@ María Peña, Cotuí, República Dominicana</a>
                   <a href="https://www.instagram.com/ym_bakerys" target="_blank" class="text-primary hover:underline">@ym_bakerys</a>
                 </div>
               </div>
-              
               <div class="flex items-start">
                 <i class="fab fa-whatsapp text-secondary mr-3 mt-1"></i>
                 <div>
@@ -409,7 +371,6 @@ María Peña, Cotuí, República Dominicana</a>
               </div>
             </div>
           </div>
-          
           <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-delay="600">
             <h3 class="text-2xl font-bold text-primary mb-4">Horario de atención</h3>
             <ul class="space-y-2">
@@ -426,7 +387,6 @@ María Peña, Cotuí, República Dominicana</a>
                 <span class="font-medium">Abierto</span>
               </li>
             </ul>
-            
             <div class="mt-8">
               <p class="mb-4">Para pedidos especiales o consultas, contáctanos con anticipación:</p>
               <a href="https://wa.me/18298352169" target="_blank" class="cta-button px-6 py-3 rounded-full text-white font-medium flex items-center justify-center">
@@ -438,7 +398,6 @@ María Peña, Cotuí, República Dominicana</a>
       </div>
     </section>
   </main>
-
    <!-- Footer -->
   <footer class="bg-primary text-white py-8 px-4" data-aos="fade-up" data-aos-offset="300">
     <div class="container mx-auto">
@@ -447,7 +406,6 @@ María Peña, Cotuí, República Dominicana</a>
           <img src="https://i.imgur.com/p7mBpVN.png" alt="Logo de YM Bakery's" class="w-24 h-auto mb-4 mx-auto md:mx-0">
           <p class="text-center md:text-left">&copy; 2025 YM Bakery's. Todos los derechos reservados.</p>
         </div>
-        
         <div class="flex flex-col items-center md:items-end">
           <div class="mb-4 text-center md:text-right">
             <p>Síguenos en nuestras redes sociales</p>
@@ -467,7 +425,6 @@ María Peña, Cotuí, República Dominicana</a>
       </div>
     </div>
   </footer>
-
   <!-- AOS JS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
   <script>
@@ -479,15 +436,12 @@ María Peña, Cotuí, República Dominicana</a>
         duration: 800,
         offset: 100
       });
-      
       // Navegación suave
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          
           const targetId = this.getAttribute('href');
           const targetElement = document.querySelector(targetId);
-          
           if (targetElement) {
             window.scrollTo({
               top: targetElement.offsetTop - 80,
@@ -499,4 +453,4 @@ María Peña, Cotuí, República Dominicana</a>
     });
   </script>
 </body>
-</html>
+          </html>
