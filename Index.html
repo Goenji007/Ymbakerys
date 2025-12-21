@@ -226,54 +226,69 @@
         display: none !important;
       }
 
-      .page {
-        padding: 0.75rem !important;
-        /* Compact padding */
-        overflow-y: auto !important;
-        border: 1px solid #e5e7eb;
-      }
-
-      /* Compact text for mobile */
-      .page-header {
-        font-size: 1.25rem !important;
-        /* Smaller header */
-        margin-bottom: 0.5rem !important;
-      }
-
-      .page h4 {
-        font-size: 0.75rem !important;
-        /* Smaller subheaders */
-        margin-bottom: 0.25rem !important;
-      }
-
-      .page li {
-        font-size: 0.8rem !important;
-        /* Smaller list text */
-        padding-bottom: 0.25rem !important;
-      }
-
-      .page .text-xs {
-        font-size: 0.65rem !important;
-      }
-
-      .dark .page {
-        border-color: #444;
-      }
-
-      .page::before,
-      .page:nth-child(even)::before,
-      .page:nth-child(odd)::before {
+      /* Mobile View: Hide inline book by default, show Trigger instead */
+      .book-container.mobile-hidden {
         display: none !important;
       }
 
-      .page img {
-        object-fit: contain !important;
-        max-height: 140px;
-        /* Reduced max height */
-        background-color: white;
-        margin-top: 0.25rem !important;
-        margin-bottom: 0.5rem !important;
+      /* Fullscreen Modal Mode */
+      .book-container.fullscreen-mode {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        /* Dark backdrop */
+        z-index: 9999;
+        padding: 1rem;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
       }
+
+      /* In Fullscreen, let pages be big and readable */
+      .book-container.fullscreen-mode .page {
+        font-size: 1rem !important;
+        padding: 1.5rem !important;
+        /* Restore original page styles */
+      }
+
+      .book-container.fullscreen-mode .page img {
+        object-fit: contain !important;
+        max-height: 250px !important;
+        /* Larger images allowed */
+        margin: 0.5rem 0 !important;
+      }
+
+      /* Mobile Trigger Button Styles */
+      .mobile-menu-trigger {
+        display: none;
+      }
+    }
+
+    /* Default Mobile rules for pages (when not fullscreen) */
+    .page .text-xs {
+      font-size: 0.65rem !important;
+    }
+
+    /* Only apply compact styles if NOT fullscreen (though logic handles this via class toggles) */
+    .page img {
+      /* default mobile img styles */
+      object-fit: contain !important;
+      max-height: 200px;
+      background-color: white;
+    }
+
+    .dark .page {
+      border-color: #444;
+    }
+
+    .page::before,
+    .page:nth-child(even)::before,
+    .page:nth-child(odd)::before {
+      display: none !important;
+    }
     }
 
     /* Interactivity Cues */
@@ -654,39 +669,56 @@
             </div>
           </div>
 
-          <!-- Back Cover -->
-          <div class="page page-cover" data-density="hard">
-            <div class="page-content">
-              <h3 class="font-display text-2xl mb-4">¡Gracias por elegirnos!</h3>
-              <p class="text-sm">Cada pedido es preparado con ingredientes frescos y mucho amor.</p>
-              <div class="mt-12 flex flex-col gap-4">
-                <span class="text-xs uppercase tracking-widest">Contáctanos</span>
-                <span class="font-bold">829-835-2169</span>
+          <!-- Mobile Trigger Button -->
+          <div id="mobile-trigger-container" class="md:hidden flex flex-col items-center justify-center py-12"
+            style="display: none;">
+            <div class="relative group cursor-pointer" id="open-fullscreen-menu">
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+              </div>
+              <button
+                class="relative px-8 py-4 bg-white dark:bg-surface-dark rounded-lg leading-none flex items-center divide-x divide-gray-600">
+                <span class="flex items-center space-x-3">
+                  <i class="fas fa-book-open text-primary text-xl"></i>
+                  <span class="text-primary font-bold text-lg">Abrir Menú Completo</span>
+                </span>
+              </button>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 animate-bounce">¡Toca para ver nuestras delicias!</p>
+          </div>
+
+          <!-- Book Container -->
+          <div id="book-container-wrapper"
+            class="book-container relative flex justify-center items-center perspective-1000">
+
+            <!-- Close Button (Fullscreen only) -->
+            <button id="close-menu-btn"
+              class="hidden absolute top-4 right-4 z-[10000] text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm transition-all">
+              <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div id="flipbook"
+              class="flip-book relative w-[500px] h-[650px] shadow-2xl transition-transform duration-500">
+
+              <div class="mt-8 flex justify-center gap-6">
+                <button id="prev-page"
+                  class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="next-page"
+                  class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+
+              <div class="mt-12 text-center">
+                <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#8a4a45] transition shadow-xl hover:scale-105 transform"
+                  href="https://wa.me/18298352169" target="_blank">
+                  <i class="fab fa-whatsapp"></i>
+                  Haz tu pedido ahora
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 flex justify-center gap-6">
-        <button id="prev-page"
-          class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <button id="next-page"
-          class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#8a4a45] transition shadow-xl hover:scale-105 transform"
-          href="https://wa.me/18298352169" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-          Haz tu pedido ahora
-        </a>
-      </div>
-    </div>
   </section>
 
   <section class="py-20 bg-primary/5 dark:bg-black/20">
@@ -886,39 +918,100 @@
       const isMobile = window.innerWidth < 768;
 
 
-      const pageFlip = new St.PageFlip(
-        document.getElementById("flipbook"),
-        {
-          width: isMobile ? 310 : 500, // Narrower for mobile portrait
-          height: isMobile ? 480 : 650, // More manageable mobile height
+      // Page Flip Initialization
+      document.addEventListener('DOMContentLoaded', () => {
+        let pageFlip = null;
+        const bookContainer = document.getElementById('book-container-wrapper');
+        const mobileTrigger = document.getElementById('mobile-trigger-container');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const flipbookEl = document.getElementById('flipbook');
 
-          size: "stretch",
-          minWidth: 315,
-          maxWidth: 1000,
-          minHeight: isMobile ? 450 : 600,
-          maxHeight: 1350,
-          maxShadowOpacity: 0.7,
-          showCover: true,
-          mobileScrollSupport: true,
-          flippingTime: 600,
-          usePortrait: isMobile,
-          startPage: 0,
-          drawShadow: true,
-          showPageCorners: true
+        function initBook(isFullScreenMode) {
+          if (pageFlip) {
+            pageFlip.destroy();
+            pageFlip = null;
+          }
+
+          const isMobileDevice = window.innerWidth < 768;
+
+          let width, height;
+
+          if (isFullScreenMode) {
+            // Fullscreen Mobile: Use vast majority of screen
+            width = Math.min(window.innerWidth * 0.95, 450);
+            height = window.innerHeight * 0.85;
+          } else if (isMobileDevice) {
+            width = 310;
+            height = 480;
+          } else {
+            width = 500;
+            height = 650;
+          }
+
+          pageFlip = new St.PageFlip(
+            flipbookEl,
+            {
+              width: width,
+              height: height,
+              size: "stretch",
+              minWidth: 300,
+              maxWidth: 1000,
+              minHeight: 400,
+              maxHeight: 1400,
+              maxShadowOpacity: 0.7,
+              showCover: true,
+              mobileScrollSupport: true,
+              flippingTime: 600,
+              usePortrait: isMobileDevice || isFullScreenMode,
+              startPage: 0,
+              drawShadow: true,
+              showPageCorners: true
+            }
+          );
+
+          pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+          const prevBtn = document.getElementById("prev-page");
+          const nextBtn = document.getElementById("next-page");
+
+          const newPrev = prevBtn.cloneNode(true);
+          const newNext = nextBtn.cloneNode(true);
+          prevBtn.parentNode.replaceChild(newPrev, prevBtn);
+          nextBtn.parentNode.replaceChild(newNext, nextBtn);
+
+          newPrev.addEventListener("click", () => pageFlip.flipPrev());
+          newNext.addEventListener("click", () => pageFlip.flipNext());
         }
-      );
 
-      // load pages
-      pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+        const isMobile = window.innerWidth < 768;
 
-      document.getElementById("flipbook").style.display = "block";
+        if (isMobile) {
+          bookContainer.classList.add('mobile-hidden');
+          mobileTrigger.style.display = 'flex';
+        } else {
+          initBook(false);
+        }
 
-      document.getElementById("prev-page").addEventListener("click", () => {
-        pageFlip.flipPrev();
-      });
+        document.getElementById('open-fullscreen-menu').addEventListener('click', () => {
+          bookContainer.classList.remove('mobile-hidden');
+          bookContainer.classList.add('fullscreen-mode');
+          mobileTrigger.style.display = 'none';
+          closeBtn.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          initBook(true);
+        });
 
-      document.getElementById("next-page").addEventListener("click", () => {
-        pageFlip.flipNext();
+        document.getElementById('close-menu-btn').addEventListener('click', () => {
+          bookContainer.classList.remove('fullscreen-mode');
+          bookContainer.classList.add('mobile-hidden');
+          mobileTrigger.style.display = 'flex';
+          closeBtn.classList.add('hidden');
+          document.body.style.overflow = '';
+          if (pageFlip) {
+            pageFlip.destroy();
+            pageFlip = null;
+          }
+        });
       });
 
       // Hide hint overlay on first interaction
