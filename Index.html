@@ -499,11 +499,20 @@
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
+    function updateThemeUI() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const mobileText = themeToggleBtnMobile?.querySelector('span');
+      if (mobileText) {
+        mobileText.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+      }
+    }
+
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+    updateThemeUI();
 
     function toggleTheme() {
       if (document.documentElement.classList.contains('dark')) {
@@ -513,6 +522,7 @@
         document.documentElement.classList.add('dark');
         localStorage.theme = 'dark';
       }
+      updateThemeUI();
     }
 
     themeToggleBtn?.addEventListener('click', toggleTheme);
