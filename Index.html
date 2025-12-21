@@ -1,569 +1,526 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="scroll-smooth" lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="YM Bakery's - Donde los dulces sueños cobran vida 🧁✨">
-  <meta property="og:description" content="¡Bienvenidos a YM Bakery's! Un rincón dulce donde cada bocado es una experiencia única. Somos una panadería artesanal dedicada a crear los más deliciosos cupcakes, pasteles y postres para cualquier ocasión especial. ¡Déjanos endulzar tu día! ✨">
-  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=YM+Bakery%27s+-+Dulces+Sue%C3%B1os+Cobran+Vida+%F0%9F%8D%AA%E2%9C%A8">
-  <meta property="og:url" content="https://ymbakerys.com">
-  <meta name="description" content="YM Bakery's - Panadería artesanal especializada en cupcakes, pasteles y postres para ocasiones especiales en Cotuí.">
-  <meta name="theme-color" content="#f9f2e7">
-  <title>YM Bakery's - Donde los dulces sueños cobran vida 🧁✨</title>
-  <!-- Favicon -->
-  <link rel="icon" href="https://i.imgur.com/p7mBpVN.png" type="image/png">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- AOS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.css" rel="stylesheet">
-  <!-- Font Awesome Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>YM Bakery's - Rincón Dulce</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#E67E22", // Warm Orange/Terracotta
+            secondary: "#25D366", // WhatsApp Green
+            "background-light": "#FFF8F0", // Creamy vanilla
+            "background-dark": "#1C1917", // Dark Chocolate
+            "surface-light": "#FFFFFF",
+            "surface-dark": "#292524", // Stone 800
+            "text-light": "#431407", // Dark Brown
+            "text-dark": "#F5F5F4", // Stone 100
+          },
+          fontFamily: {
+            display: ["'Playfair Display'", "serif"],
+            body: ["'Lato'", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.75rem",
+          },
+        },
+      },
+    };
+  </script>
   <style>
-    :root {
-      --color-primary: #8a5a44;
-      --color-secondary: #e8875f;
-      --color-background: #f9f2e7;
-      --color-text: #443d3b;
-      --color-accent: #fdd1b9;
-      --color-whatsapp: #25d366;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--color-background);
-      color: var(--color-text);
-      line-height: 1.6;
-    }
-    .bg-primary {
-      background-color: var(--color-primary);
-    }
-    .text-primary {
-      color: var(--color-primary);
-    }
-    .text-secondary {
-      color: var(--color-secondary);
-    }
-    .bg-gradient-bakery {
-      background: linear-gradient(135deg, #ffebc4, #fdd1b9);
-    }
-    .cta-button {
-      background-color: var(--color-whatsapp);
-      transition: all 0.3s ease;
-    }
-    .cta-button:hover {
-      background-color: #1da851;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .social-icon {
-      transition: all 0.3s ease;
-    }
-    .social-icon:hover {
-      transform: scale(1.2);
-    }
-    .product-card {
-      transition: all 0.3s ease;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(138, 90, 68, 0.1);
-    }
-    /* Estilos para impresión/PDF */
-    @media print {
-      body {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      section {
-        page-break-inside: avoid;
-        margin-bottom: 2rem;
-      }
-      .no-print {
-        display: none;
-      }
+    ::-webkit-scrollbar {
+      width: 10px
     }
 
-    /* Fixed WhatsApp Button */
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 24px;
-      right: 24px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      z-index: 999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 28px;
-      transition: all 0.3s ease;
-      animation: pulse 2s infinite;
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1
     }
 
-    .whatsapp-float:hover {
-      transform: scale(1.1) rotate(12deg);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    ::-webkit-scrollbar-thumb {
+      background: #E67E22;
+      border-radius: 5px
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    .hero-pattern {
+      background-color: #fff;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
     }
 
-    /* Tooltip for WhatsApp button */
-    .whatsapp-tooltip {
-      position: absolute;
-      bottom: 70px;
-      right: 24px;
-      background: rgba(0,0,0,0.8);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .whatsapp-float:hover + .whatsapp-tooltip {
-      opacity: 1;
-    }
-
-    /* Horario de atención style as per image */
-    .horario-container {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    .horario-title {
-      font-size: 28px;
-      font-weight: 600;
-      color: #8a5a44;
-      margin-bottom: 20px;
-    }
-
-    .horario-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      font-size: 18px;
-      color: #443d3b;
-    }
-
-    .horario-item span:last-child {
-      font-weight: 500;
-    }
-
-    .horario-message {
-      margin-top: 24px;
-      margin-bottom: 24px;
-      font-size: 16px;
-      color: #443d3b;
-      line-height: 1.5;
-    }
-
-    .whatsapp-button {
-      background-color: #25d366;
-      color: white;
-      border-radius: 50px;
-      padding: 16px 24px;
-      font-size: 18px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .whatsapp-button:hover {
-      background-color: #1da851;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    .dark .hero-pattern {
+      background-color: #1C1917;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
     }
   </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="bg-gradient-bakery py-8 px-4 md:px-8 flex flex-col items-center" data-aos="fade-down" data-aos-duration="1000">
-    <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4" data-aos="fade-down" data-aos-delay="300">YM Bakery's</h1>
-    <img src="https://i.imgur.com/p7mBpVN.png" alt="Logo de YM Bakery's" class="w-40 md:w-48 h-auto my-4" data-aos="zoom-in" data-aos-delay="600">
-    <p class="text-lg md:text-xl max-w-2xl text-center" data-aos="fade-up" data-aos-delay="900">Un rincón dulce donde cada bocado es una experiencia única.</p>
-  </header>
-  <!-- Barra de navegación -->
-  <nav class="bg-white shadow-md py-4 sticky top-0 z-50 no-print" data-aos="fade-down" data-aos-duration="800">
-    <div class="container mx-auto px-4 flex justify-center">
-      <ul class="flex space-x-6 md:space-x-12 flex-wrap justify-center">
-        <li><a href="#nosotros" class="text-primary hover:text-secondary font-medium transition-colors">Nosotros</a></li>
-        <li><a href="#productos" class="text-primary hover:text-secondary font-medium transition-colors">Productos</a></li>
-        <li><a href="#menu" class="text-primary hover:text-secondary font-medium transition-colors">Menú</a></li>
-        <li><a href="#contacto" class="text-primary hover:text-secondary font-medium transition-colors">Contacto</a></li>
-      </ul>
+
+<body
+  class="font-body bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
+  <nav
+    class="fixed w-full z-50 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur shadow-md transition-colors duration-300">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a class="flex items-center gap-2 group" href="#">
+        <img src="assets/img/logo.png" alt="Logo"
+          class="w-12 h-12 object-contain group-hover:rotate-12 transition-transform">
+        <span class="text-2xl font-bold font-display text-primary tracking-wide">YM Bakery's</span>
+      </a>
+      <div class="hidden md:flex space-x-8 items-center font-medium">
+        <a class="hover:text-primary transition-colors" href="#about">Nosotros</a>
+        <a class="hover:text-primary transition-colors" href="#products">Productos</a>
+        <a class="hover:text-primary transition-colors" href="#menu">Menú</a>
+        <a class="hover:text-primary transition-colors" href="#contact">Contacto</a>
+        <button
+          class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          id="theme-toggle">
+          <i class="fas fa-moon dark:hidden text-gray-800"></i>
+          <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+        </button>
+      </div>
+      <button class="md:hidden text-2xl" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div
+      class="hidden md:hidden bg-surface-light dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 p-4"
+      id="mobile-menu">
+      <div class="flex flex-col space-y-4">
+        <a class="block hover:text-primary" href="#about">Nosotros</a>
+        <a class="block hover:text-primary" href="#products">Productos</a>
+        <a class="block hover:text-primary" href="#menu">Menú</a>
+        <a class="block hover:text-primary" href="#contact">Contacto</a>
+        <button class="flex items-center gap-2 text-left w-full" id="theme-toggle-mobile">
+          <span>Modo Oscuro</span>
+          <i class="fas fa-moon dark:hidden"></i>
+          <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+        </button>
+      </div>
     </div>
   </nav>
-  <!-- Contenido Principal -->
-  <main class="container mx-auto px-4 py-8">
-    <!-- Sección Nosotros -->
-    <section id="nosotros" class="my-12 md:my-16" data-aos="fade-up" data-aos-offset="200">
-      <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8" data-aos="fade-right" data-aos-delay="300">¿Qué nos hace especiales?</h2>
-      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
-        <p class="text-lg mb-4" data-aos="fade-left" data-aos-delay="600">
-          Somos una <span class="text-secondary font-semibold">panadería artesanal</span> dedicada a crear los más deliciosos cupcakes, pasteles y postres. Perfectos para cualquier ocasión especial, combinamos sabor, creatividad y amor en cada creación.
+
+  <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-pattern">
+    <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="z-10 animate-fade-in-up">
+        <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Dulzura Artesanal</span>
+        <h1 class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 text-gray-900 dark:text-white">
+          Cada bocado es una <span class="text-primary italic">experiencia única</span>
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed">
+          Un rincón dulce donde la pasión por la repostería se encuentra con ingredientes de la más alta calidad. Desde
+          cupcakes hasta pasteles de boda.
         </p>
-        <p class="text-lg mb-8" data-aos="fade-right" data-aos-delay="900">
-          Desde un antojo hasta la mesa de tu celebración, en YM Bakery's convertimos tus dulces sueños en realidad.
-        </p>
-        <div class="flex justify-center" data-aos="flip-left" data-aos-delay="1200">
-          <a href="https://wa.me/18298352169" target="_blank" class="cta-button px-6 py-3 rounded-full text-white font-medium flex items-center">
-            <i class="fab fa-whatsapp mr-2 text-xl"></i> Contáctanos por WhatsApp
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-orange-600 hover:scale-105 transition transform text-center"
+            href="#menu">
+            Ver Menú Completo
+          </a>
+          <a class="bg-white dark:bg-gray-800 text-primary border-2 border-primary dark:border-primary px-8 py-4 rounded-full font-bold shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 transition text-center"
+            href="#contact">
+            Contáctanos
           </a>
         </div>
       </div>
-    </section>
-    <!-- Sección Productos -->
-    <section id="productos" class="my-12 md:my-16" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Nuestros Productos</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Producto 1 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
-          <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cupcakes artesanales" class="w-full h-56 object-cover">
-          <div class="p-4">
-            <h3 class="text-xl font-bold text-primary mb-2">Cupcakes Artesanales</h3>
-            <p class="text-gray-700">Deliciosos cupcakes decorados artesanalmente para cualquier ocasión. ¡Personaliza tus sabores y diseños favoritos!</p>
+      <div class="relative z-10 group">
+        <div class="absolute inset-0 bg-primary/20 rounded-full blur-3xl transform -translate-y-4 scale-90"></div>
+        <img alt="Fondo Panadería"
+          class="relative w-full rounded-2xl shadow-2xl transform group-hover:-rotate-2 transition duration-500 border-4 border-white dark:border-gray-700 object-cover h-[500px]"
+          src="assets/img/hero.png" />
+        <div
+          class="absolute -bottom-6 -left-6 bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-xl flex items-center gap-4 animate-bounce duration-[3000ms]">
+          <div class="bg-yellow-100 dark:bg-yellow-900 p-3 rounded-full text-yellow-600 dark:text-yellow-400">
+            <i class="fas fa-star text-xl"></i>
           </div>
-        </div>
-        <!-- Producto 2 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="400">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pasteles para celebraciones" class="w-full h-56 object-cover">
-          <div class="p-4">
-            <h3 class="text-xl font-bold text-primary mb-2">Pasteles para Celebraciones</h3>
-            <p class="text-gray-700">Pasteles únicos para tus momentos especiales. Elaborados con ingredientes frescos y decoraciones personalizadas.</p>
-          </div>
-        </div>
-        <!-- Producto 3 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="600">
-          <img src="https://images.unsplash.com/photo-1514066558159-fc8c737ef259?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Postres variados" class="w-full h-56 object-cover">
-          <div class="p-4">
-            <h3 class="text-xl font-bold text-primary mb-2">Postres Variados</h3>
-            <p class="text-gray-700">Brownies, galletas, tartas y muchos más. La dulzura perfecta para complacer tus antojos en cualquier momento.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Sección Menú -->
-    <section id="menu" class="my-12 md:my-16" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Nuestro Menú</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Flan Tradicional y de Chocolate -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Flan Tradicional y de Chocolate</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Tradicional Porción</span>
-                <span class="font-medium">$125.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Tradicional Completo</span>
-                <span class="font-medium">$1,500.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Chocolate Porción</span>
-                <span class="font-medium">$150.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Chocolate Completo</span>
-                <span class="font-medium">$1,850.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Chocoflan -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="300">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Chocoflan</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Porción</span>
-                <span class="font-medium">$200.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Completo</span>
-                <span class="font-medium">$2,500.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Brownies -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="400">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Brownies</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Brownie de oreo</span>
-                <span class="font-medium">$80.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Red Velvet</span>
-                <span class="font-medium">$90.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Pudín de Pan</span>
-                <span class="font-medium">$75.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Tres Leches -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="500">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Tres Leches</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Tradicional</span>
-                <span class="font-medium">$150.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Chocolate</span>
-                <span class="font-medium">$180.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Galletas -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="600">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Galletas</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Leche condensada rellena de dulce de leche</span>
-                <span class="font-medium">$60.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Galletas de chispas de chocolate</span>
-                <span class="font-medium">$60.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Galletas de mantequilla</span>
-                <span class="font-medium">$50.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>Alfajores</span>
-                <span class="font-medium">$75.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Deditos -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="700">
-          <div class="bg-gradient-bakery p-4 text-center">
-            <h3 class="text-xl font-bold text-primary">Deditos</h3>
-          </div>
-          <div class="p-4">
-            <ul class="space-y-2">
-              <li class="flex justify-between items-center">
-                <span>Docena</span>
-                <span class="font-medium">$275.00</span>
-              </li>
-              <li class="flex justify-between items-center">
-                <span>24 Deditos</span>
-                <span class="font-medium">$350.00</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- Botón Pedir Ahora -->
-      <div class="flex justify-center mt-8" data-aos="fade-up" data-aos-delay="800">
-        <a href="https://wa.me/18298352169" target="_blank" class="cta-button px-8 py-4 rounded-full text-white font-bold text-lg flex items-center">
-          <i class="fab fa-whatsapp mr-3 text-xl"></i> Haz tu pedido ahora
-        </a>
-      </div>
-    </section>
-    <!-- Sección Testimonios -->
-    <section class="my-12 md:my-16 bg-white rounded-xl shadow-lg p-6 md:p-8" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Lo que dicen nuestros clientes</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Testimonio 1 -->
-        <div class="bg-gradient-bakery p-6 rounded-lg" data-aos="fade-right" data-aos-delay="200">
-          <div class="flex items-center mb-4">
-            <div class="text-yellow-500 flex">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-          <p class="italic text-gray-800">"Los cupcakes más deliciosos que he probado. La textura, el sabor y la decoración son perfectos. Definitivamente mi lugar favorito para endulzar cualquier ocasión especial."</p>
-          <p class="font-semibold mt-3 text-primary">- María González</p>
-        </div>
-        <!-- Testimonio 2 -->
-        <div class="bg-gradient-bakery p-6 rounded-lg" data-aos="fade-left" data-aos-delay="400">
-          <div class="flex items-center mb-4">
-            <div class="text-yellow-500 flex">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-          <p class="italic text-gray-800">"El pastel que encargué para el cumpleaños de mi hija fue espectacular. No solo se veía hermoso, sino que sabía incluso mejor. Todos quedaron encantados. ¡Gracias YM Bakery's!"</p>
-          <p class="font-semibold mt-3 text-primary">- Carlos Ramírez</p>
-        </div>
-      </div>
-    </section>
-    <!-- Sección Contacto -->
-    <section id="contacto" class="my-12 md:my-16" data-aos="fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Contáctanos</h2>
-      <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-        <div class="flex flex-col md:flex-row">
-          <div class="w-full md:w-1/2 mb-8 md:mb-0" data-aos="fade-right" data-aos-delay="300">
-            <h3 class="text-2xl font-bold text-primary mb-4">Información de contacto</h3>
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <i class="fas fa-phone-alt text-secondary mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium">Teléfono:</p>
-                  <a href="tel:+18298352169" class="text-primary hover:underline">829-835-2169</a>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <i class="fas fa-map-marker-alt text-secondary mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium">Ubicación:</p>
-                  <a href="https://maps.app.goo.gl/HpLokVVEcCcUAuZq6" target="_blank" class="text-primary hover:underline">Pueblo Nuevo C/Jesús
-María Peña, Cotuí, República Dominicana</a>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <i class="fab fa-instagram text-secondary mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium">Instagram:</p>
-                  <a href="https://www.instagram.com/ym_bakerys" target="_blank" class="text-primary hover:underline">@ym_bakerys</a>
-                </div>
-              </div>
-              <div class="flex items-start">
-                <i class="fab fa-whatsapp text-secondary mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium">WhatsApp:</p>
-                  <a href="https://wa.me/18298352169" target="_blank" class="text-primary hover:underline">829-835-2169</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-delay="600">
-            <div class="horario-container">
-              <h3 class="horario-title">Horario de atención</h3>
-              <div class="horario-item">
-                <span>Lunes - Sábados:</span>
-                <span>únicamente pedidos</span>
-              </div>
-              <div class="horario-item">
-                <span>Domingos:</span>
-                <span>Abierto</span>
-              </div>
-              <p class="horario-message">Para pedidos especiales o consultas, contáctanos con anticipación:</p>
-              <a href="https://wa.me/18298352169" target="_blank" class="whatsapp-button">
-                <i class="fab fa-whatsapp"></i> Enviar mensaje
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-   <!-- Footer -->
-  <footer class="bg-primary text-white py-8 px-4" data-aos="fade-up" data-aos-offset="300">
-    <div class="container mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-6 md:mb-0">
-          <img src="https://i.imgur.com/p7mBpVN.png" alt="Logo de YM Bakery's" class="w-24 h-auto mb-4 mx-auto md:mx-0">
-          <p class="text-center md:text-left">&copy; 2025 YM Bakery's. Todos los derechos reservados.</p>
-        </div>
-        <div class="flex flex-col items-center md:items-end">
-          <div class="mb-4 text-center md:text-right">
-            <p>Síguenos en nuestras redes sociales</p>
-          </div>
-          <div class="flex space-x-6">
-            <a href="#" target="_blank" aria-label="Facebook" class="social-icon" data-aos="zoom-in" data-aos-delay="300">
-              <i class="fab fa-facebook-f text-2xl"></i>
-            </a>
-            <a href="https://www.instagram.com/ym_bakerys" target="_blank" aria-label="Instagram" class="social-icon" data-aos="zoom-in" data-aos-delay="600">
-              <i class="fab fa-instagram text-2xl"></i>
-            </a>
-            <a href="https://wa.me/18298352169" target="_blank" aria-label="WhatsApp" class="social-icon" data-aos="zoom-in" data-aos-delay="900">
-              <i class="fab fa-whatsapp text-2xl"></i>
-            </a>
+          <div>
+            <p class="font-bold text-gray-900 dark:text-white">Calidad Premium</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">100% Artesanal</p>
           </div>
         </div>
       </div>
     </div>
+  </header>
+
+  <section class="py-20 bg-white dark:bg-surface-dark transition-colors duration-300" id="about">
+    <div class="container mx-auto px-6">
+      <div
+        class="flex flex-col md:flex-row items-center gap-12 bg-background-light dark:bg-background-dark rounded-3xl p-8 md:p-12 shadow-xl border border-primary/10">
+        <div class="md:w-1/2 relative">
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary/20 rounded-full z-0"></div>
+          <img alt="Interior de Panadería" class="relative z-10 rounded-2xl shadow-lg w-full h-80 object-cover"
+            src="assets/img/hero.png" />
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-3xl md:text-4xl font-display font-bold mb-6 text-primary">¿Qué nos hace especiales?</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+            Somos una <strong class="text-primary">panadería artesanal</strong> dedicada a crear los más deliciosos
+            cupcakes, pasteles y postres. Perfectos para cualquier ocasión especial, combinamos sabor, creatividad y
+            amor en cada creación.
+          </p>
+          <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+            Desde un antojo hasta la mesa de tu celebración, en YM Bakery's convertimos tus dulces sueños en realidad.
+            Utilizamos solo ingredientes frescos y técnicas tradicionales.
+          </p>
+          <a class="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#1faa51] transition shadow-lg"
+            href="https://wa.me/18298352169" target="_blank">
+            <i class="fab fa-whatsapp text-xl"></i>
+            Contáctanos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-background-light dark:bg-background-dark transition-colors duration-300" id="products">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-primary font-bold uppercase text-sm tracking-wider">Favoritos</span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold mt-2 text-gray-900 dark:text-white">Nuestros Productos
+        </h2>
+        <div class="w-24 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div
+          class="group bg-white dark:bg-surface-dark rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-2">
+          <div class="h-64 overflow-hidden">
+            <img alt="Cupcakes Premium"
+              class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+              src="assets/img/cupcakes.png" />
+          </div>
+          <div class="p-8 text-left">
+            <h3 class="text-2xl font-display font-bold text-gray-800 dark:text-white mb-3">Cupcakes Artesanales</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Deliciosos cupcakes decorados artesanalmente para cualquier
+              ocasión. ¡Personaliza tus sabores!</p>
+            <span class="text-primary font-bold group-hover:underline cursor-pointer">Ver Detalles →</span>
+          </div>
+        </div>
+        <div
+          class="group bg-white dark:bg-surface-dark rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-2">
+          <div class="h-64 overflow-hidden">
+            <img alt="Pasteles Premium"
+              class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+              src="assets/img/cakes.png" />
+          </div>
+          <div class="p-8 text-left">
+            <h3 class="text-2xl font-display font-bold text-gray-800 dark:text-white mb-3">Pasteles para Celebraciones
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Pasteles únicos para tus momentos especiales. Frescos y con
+              decoraciones personalizadas.</p>
+            <span class="text-primary font-bold group-hover:underline cursor-pointer">Ver Detalles →</span>
+          </div>
+        </div>
+        <div
+          class="group bg-white dark:bg-surface-dark rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden transform hover:-translate-y-2">
+          <div class="h-64 overflow-hidden">
+            <img alt="Postres Variados"
+              class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+              src="assets/img/desserts.png" />
+          </div>
+          <div class="p-8 text-left">
+            <h3 class="text-2xl font-display font-bold text-gray-800 dark:text-white mb-3">Postres Variados</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Brownies, galletas, tartas y mucho más. La dulzura perfecta
+              para complacer tus antojos.</p>
+            <span class="text-primary font-bold group-hover:underline cursor-pointer">Ver Detalles →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 relative" id="menu">
+    <div
+      class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none">
+    </div>
+    <div class="container mx-auto px-6 relative z-10 text-left">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white">Nuestro Menú</h2>
+        <p class="text-gray-500 dark:text-gray-400 mt-4">Precios en DOP</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
+          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Flan
+            Tradicional y de Chocolate</h3>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Tradicional Porción</span>
+              <span class="font-bold">$125.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Tradicional Completo</span>
+              <span class="font-bold">$1,500.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Chocolate Porción</span>
+              <span class="font-bold">$150.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Chocolate Completo</span>
+              <span class="font-bold">$1,850.00</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
+          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Chocoflan
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Porción</span>
+              <span class="font-bold">$200.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Completo</span>
+              <span class="font-bold">$2,500.00</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
+          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Brownies</h3>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Brownie de Oreo</span>
+              <span class="font-bold">$80.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Red Velvet</span>
+              <span class="font-bold">$90.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Pudín de Pan</span>
+              <span class="font-bold">$75.00</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
+          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Tres Leches
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Tradicional</span>
+              <span class="font-bold">$150.00</span>
+            </li>
+            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+              <span>Chocolate</span>
+              <span class="font-bold">$180.00</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary md:col-span-2">
+          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Galletas
+            &amp; Otros</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <ul class="space-y-4">
+              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+                <span>Rellena de Dulce de leche</span>
+                <span class="font-bold">$60.00</span>
+              </li>
+              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+                <span>Chispas de Chocolate</span>
+                <span class="font-bold">$60.00</span>
+              </li>
+            </ul>
+            <ul class="space-y-4">
+              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+                <span>Galletas de Mantequilla</span>
+                <span class="font-bold">$50.00</span>
+              </li>
+              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
+                <span>Deditos (Docena)</span>
+                <span class="font-bold">$275.00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 text-center">
+        <a class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#1faa51] transition shadow-xl hover:scale-105 transform"
+          href="https://wa.me/18298352169" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          Haz tu pedido ahora
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-primary/5 dark:bg-black/20">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-display font-bold text-center text-primary mb-12">Lo que dicen nuestros clientes</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-surface-dark p-8 rounded-2xl shadow-lg relative text-left">
+          <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-primary/20"></i>
+          <div class="flex text-yellow-400 mb-4">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 italic mb-6">"Los cupcakes más deliciosos que he probado. La
+            textura, el sabor y la decoración son perfectos. Definitivamente mi lugar favorito para endulzar cualquier
+            ocasión especial."</p>
+          <div class="font-bold text-gray-900 dark:text-white">— María González</div>
+        </div>
+        <div class="bg-white dark:bg-surface-dark p-8 rounded-2xl shadow-lg relative text-left">
+          <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-primary/20"></i>
+          <div class="flex text-yellow-400 mb-4">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 italic mb-6">"El pastel que encargué para el cumpleaños de mi hija
+            fue espectacular. No solo se veía hermoso, sino que sabía incluso mejor. Todos quedaron encantados. ¡Gracias
+            YM Bakery's!"</p>
+          <div class="font-bold text-gray-900 dark:text-white">— Carlos Ramírez</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-background-light dark:bg-background-dark text-left" id="contact">
+    <div class="container mx-auto px-6">
+      <div class="bg-white dark:bg-surface-dark rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+        <div class="lg:w-1/2 p-10 lg:p-16 flex flex-col justify-center">
+          <h2 class="text-4xl font-display font-bold text-primary mb-8">Contáctanos</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-10">¿Tienes un pedido especial o alguna pregunta? Estamos aquí
+            para ayudarte a endulzar tu día.</p>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 dark:text-white">Teléfono &amp; WhatsApp</h4>
+                <p class="text-gray-600 dark:text-gray-400">829-835-2169</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 dark:text-white">Ubicación</h4>
+                <p class="text-gray-600 dark:text-gray-400">Pueblo Nuevo C/ Jesús María Peña, Cotuí, República
+                  Dominicana</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <i class="fab fa-instagram"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 dark:text-white">Instagram</h4>
+                <p class="text-gray-600 dark:text-gray-400">@ym_bakerys</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-10 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
+            <h4 class="font-display font-bold text-lg mb-4 text-gray-900 dark:text-white">Horario de atención</h4>
+            <div class="flex justify-between text-sm mb-2 text-gray-600 dark:text-gray-300">
+              <span>Lunes - Sábados:</span>
+              <span class="font-bold">Únicamente pedidos</span>
+            </div>
+            <div class="flex justify-between text-sm text-gray-600 dark:text-gray-300">
+              <span>Domingos:</span>
+              <span class="font-bold text-green-500">Abierto</span>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 bg-gray-50 dark:bg-[#201d1b] p-10 lg:p-16">
+          <form class="space-y-6">
+            <div>
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nombre Completo</label>
+              <input
+                class="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-primary focus:ring-primary outline-none"
+                placeholder="Tu nombre" type="text" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Correo Electrónico</label>
+              <input
+                class="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-primary focus:ring-primary outline-none"
+                placeholder="tu@correo.com" type="email" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Mensaje</label>
+              <textarea
+                class="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-primary focus:ring-primary outline-none"
+                placeholder="¿En qué podemos ayudarte?" rows="4"></textarea>
+            </div>
+            <button
+              class="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition shadow-lg"
+              type="button">
+              Enviar Mensaje
+            </button>
+          </form>
+          <div class="mt-8 h-48 w-full rounded-xl overflow-hidden shadow-md">
+            <iframe allowfullscreen="" class="filter dark:invert dark:grayscale" height="100%" loading="lazy"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.155720979876!2d-70.1500!3d19.0500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAzJzAwLjAiTiA3MMKwMDknMDAuMCJX!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+              style="border:0;" width="100%"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-primary">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+        <div class="mb-6 md:mb-0 text-center md:text-left">
+          <div class="text-3xl font-display font-bold text-primary mb-2">YM Bakery's</div>
+          <p class="text-gray-400">Hecho con amor en cada detalle.</p>
+        </div>
+        <div class="flex gap-6">
+          <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"
+            href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"
+            href="https://www.instagram.com/ym_bakerys" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition"
+            href="https://wa.me/18298352169" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+        <p>© 2025 YM Bakery's. Todos los derechos reservados.</p>
+      </div>
+    </div>
   </footer>
-  <!-- AOS JS -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+
+  <a class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center animate-bounce duration-[2000ms]"
+    href="https://wa.me/18298352169" target="_blank">
+    <i class="fab fa-whatsapp text-3xl"></i>
+  </a>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Inicializar AOS
-      AOS.init({
-        once: true,
-        easing: 'ease-in-out',
-        duration: 800,
-        offset: 100
-      });
-      // Navegación suave
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+
+    themeToggleBtn?.addEventListener('click', toggleTheme);
+    themeToggleBtnMobile?.addEventListener('click', toggleTheme);
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
   </script>
-
-  <!-- Fixed WhatsApp Button -->
-  <a href="https://wa.me/18298352169" target="_blank" class="whatsapp-float" aria-label="Chatear por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <div class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</div>
 </body>
-</html>
 
+</html>
