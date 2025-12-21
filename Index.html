@@ -272,9 +272,7 @@
       font-size: 0.65rem !important;
     }
 
-    /* Only apply compact styles if NOT fullscreen (though logic handles this via class toggles) */
     .page img {
-      /* default mobile img styles */
       object-fit: contain !important;
       max-height: 200px;
       background-color: white;
@@ -289,7 +287,20 @@
     .page:nth-child(odd)::before {
       display: none !important;
     }
+
+    /* Cover Trigger for Mobile */
+    .mobile-cover-trigger {
+      cursor: pointer;
+      max-width: 320px;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
+
+    .mobile-cover-trigger:hover {
+      transform: scale(1.02);
+    }
+
 
     /* Interactivity Cues */
     .corner-hint {
@@ -516,13 +527,32 @@
         <p class="text-gray-500 dark:text-gray-400 mt-4 italic">Desliza para cambiar de página</p>
       </div>
 
-      <div class="book-container relative">
-        <!-- Hint Overlay -->
+      <!-- Mobile Trigger (Cover Preview) -->
+      <div id="mobile-menu-trigger-wrap" class="md:hidden">
+        <div class="mobile-cover-trigger page-cover shadow-2xl rounded-xl" id="open-menu-mobile">
+          <div class="page-content py-12">
+            <img src="assets/img/logo.png" alt="Logo" class="mx-auto w-32 mb-6">
+            <h2 class="font-display text-3xl font-bold text-white mb-2">Menú Dulce</h2>
+            <p class="text-white/80 text-center">YM Bakery's</p>
+            <div
+              class="mt-8 px-6 py-3 bg-white/20 rounded-full text-white font-bold inline-block animate-pulse mx-auto">
+              <i class="fas fa-hand-pointer mr-2"></i> Toca para abrir el menú
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Book Container Modal -->
+      <div id="book-container-wrapper" class="book-container relative">
+        <!-- Close Button (Fullscreen only) -->
+        <button id="close-menu-btn"
+          class="hidden fixed top-6 right-6 z-[10001] text-white bg-black/50 hover:bg-black/70 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md transition-all">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
 
-        <div class="flip-book" id="flipbook">
+        <div id="flipbook" class="flip-book shadow-2xl">
           <!-- Cover -->
-          <div class="page page-cover corner-hint" data-density="hard">
+          <div class="page page-cover" data-density="hard">
             <div class="page-content">
               <img src="assets/img/logo.png" alt="Logo">
               <h2 class="font-display">Menú Dulce</h2>
@@ -538,7 +568,7 @@
               <ul class="space-y-6">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <div class="flex flex-col">
+                  <div class="flex flex-col text-left">
                     <span class="font-bold">Tradicional Porción</span>
                     <span class="text-xs text-gray-500">Receta de la abuela</span>
                   </div>
@@ -561,9 +591,9 @@
                 </li>
               </ul>
               <div class="grid grid-cols-2 gap-2 mt-4">
-                <img src="assets/img/flan-strawberry.jpg" alt="Flan Completo"
+                <img src="assets/img/flan-strawberry.jpg" alt="Flan"
                   class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
-                <img src="assets/img/flan-containers.jpg" alt="Flanes Individuales"
+                <img src="assets/img/flan-containers.jpg" alt="Flanes"
                   class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
               </div>
               <div class="page-footer"></div>
@@ -576,7 +606,7 @@
               <div class="page-header">Chocoflan & Brownies</div>
               <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan"
                 class="w-full h-32 object-contain rounded-lg mb-4 shadow-sm bg-white">
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Chocoflan</h4>
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 text-left">Chocoflan</h4>
               <ul class="space-y-4 mb-8">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
@@ -589,10 +619,9 @@
                   <span class="font-bold text-primary">$2,500.00</span>
                 </li>
               </ul>
-
               <img src="assets/img/brownie-oreo.jpg" alt="Brownies"
                 class="w-full h-24 object-contain rounded-lg mb-2 shadow-sm bg-white">
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Brownies</h4>
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 text-left">Brownies</h4>
               <ul class="space-y-4">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
@@ -604,25 +633,19 @@
                   <span>Red Velvet</span>
                   <span class="font-bold text-primary">$90.00</span>
                 </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span>Pudín de Pan</span>
-                  <span class="font-bold text-primary">$75.00</span>
-                </li>
               </ul>
               <div class="page-footer"></div>
             </div>
           </div>
 
-          <!-- Page 3: Tres Leches & Cookies -->
+          <!-- Page 3: Tres Leches & Galletas -->
           <div class="page">
             <div class="page-content">
               <div class="page-header">Tres Leches & Galletas</div>
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 mobile-compact-header">Tres
-                Leches</h4>
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 text-left">Tres Leches</h4>
               <img src="assets/img/chocoflan-cherry.jpg" alt="Tres Leches"
                 class="w-full h-24 object-contain rounded-lg mb-4 shadow-sm bg-white">
-              <ul class="space-y-4 mb-6 mobile-compact-list">
+              <ul class="space-y-4 mb-6">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
                   <span>Tradicional</span>
@@ -634,10 +657,8 @@
                   <span class="font-bold text-primary">$180.00</span>
                 </li>
               </ul>
-
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 mobile-compact-header">Galletas
-              </h4>
-              <ul class="space-y-3 mobile-compact-list">
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 text-left">Galletas</h4>
+              <ul class="space-y-3">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
                   <span>Rellena de Dulce de leche</span>
@@ -653,11 +674,6 @@
                   <span>Galletas de Mantequilla</span>
                   <span class="font-bold text-primary">$50.00</span>
                 </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Deditos (Docena)</span>
-                  <span class="font-bold text-primary">$275.00</span>
-                </li>
               </ul>
               <div class="grid grid-cols-2 gap-2 mt-2">
                 <img src="assets/img/cookies-powder.jpg" alt="Polvorones"
@@ -669,56 +685,39 @@
             </div>
           </div>
 
-          <!-- Mobile Trigger Button -->
-          <div id="mobile-trigger-container" class="md:hidden flex flex-col items-center justify-center py-12"
-            style="display: none;">
-            <div class="relative group cursor-pointer" id="open-fullscreen-menu">
-              <div
-                class="absolute -inset-1 bg-gradient-to-r from-primary to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+          <!-- Back Cover -->
+          <div class="page page-cover" data-density="hard">
+            <div class="page-content">
+              <h3 class="font-display text-2xl mb-4">¡Gracias por elegirnos!</h3>
+              <p class="text-sm">Cada pedido es preparado con ingredientes frescos y mucho amor.</p>
+              <div class="mt-12 flex flex-col gap-4">
+                <span class="text-xs uppercase tracking-widest">Contáctanos</span>
+                <span class="font-bold">829-835-2169</span>
               </div>
-              <button
-                class="relative px-8 py-4 bg-white dark:bg-surface-dark rounded-lg leading-none flex items-center divide-x divide-gray-600">
-                <span class="flex items-center space-x-3">
-                  <i class="fas fa-book-open text-primary text-xl"></i>
-                  <span class="text-primary font-bold text-lg">Abrir Menú Completo</span>
-                </span>
-              </button>
             </div>
-            <p class="text-sm text-gray-500 mt-4 animate-bounce">¡Toca para ver nuestras delicias!</p>
           </div>
+        </div>
 
-          <!-- Book Container -->
-          <div id="book-container-wrapper"
-            class="book-container relative flex justify-center items-center perspective-1000">
+        <!-- Navigation Buttons -->
+        <div class="mt-8 flex justify-center gap-6" id="nav-buttons-container">
+          <button id="prev-page"
+            class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <button id="next-page"
+            class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
 
-            <!-- Close Button (Fullscreen only) -->
-            <button id="close-menu-btn"
-              class="hidden absolute top-4 right-4 z-[10000] text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm transition-all">
-              <i class="fas fa-times text-xl"></i>
-            </button>
+        <div class="mt-12 text-center">
+          <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#8a4a45] transition shadow-xl hover:scale-105 transform"
+            href="https://wa.me/18298352169" target="_blank">
+            <i class="fab fa-whatsapp"></i> Haz tu pedido ahora
+          </a>
+        </div>
+      </div>
 
-            <div id="flipbook"
-              class="flip-book relative w-[500px] h-[650px] shadow-2xl transition-transform duration-500">
-
-              <div class="mt-8 flex justify-center gap-6">
-                <button id="prev-page"
-                  class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-                  <i class="fas fa-arrow-left"></i>
-                </button>
-                <button id="next-page"
-                  class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-                  <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-
-              <div class="mt-12 text-center">
-                <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#8a4a45] transition shadow-xl hover:scale-105 transform"
-                  href="https://wa.me/18298352169" target="_blank">
-                  <i class="fab fa-whatsapp"></i>
-                  Haz tu pedido ahora
-                </a>
-              </div>
-            </div>
   </section>
 
   <section class="py-20 bg-primary/5 dark:bg-black/20">
@@ -868,153 +867,106 @@
 
   <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
   <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    function updateThemeUI() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const mobileText = themeToggleBtnMobile?.querySelector('span');
-      if (mobileText) {
-        mobileText.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
-      }
-    }
-
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    updateThemeUI();
-
-    function toggleTheme() {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-      }
-      updateThemeUI();
-    }
-
-    themeToggleBtn?.addEventListener('click', toggleTheme);
-    themeToggleBtnMobile?.addEventListener('click', toggleTheme);
-    mobileMenuBtn?.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      const icon = mobileMenuBtn.querySelector('i');
-      if (mobileMenu.classList.contains('hidden')) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      } else {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      }
-    });
-
-    // Page Flip Initialization
+    // Page Flip Comprehensive Logic
     document.addEventListener('DOMContentLoaded', () => {
-      const isMobile = window.innerWidth < 768;
+      let pageFlip = null;
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-
-      // Page Flip Initialization
-      document.addEventListener('DOMContentLoaded', () => {
-        let pageFlip = null;
-        const bookContainer = document.getElementById('book-container-wrapper');
-        const mobileTrigger = document.getElementById('mobile-trigger-container');
-        const closeBtn = document.getElementById('close-menu-btn');
-        const flipbookEl = document.getElementById('flipbook');
-
-        function initBook(isFullScreenMode) {
-          if (pageFlip) {
-            pageFlip.destroy();
-            pageFlip = null;
-          }
-
-          const isMobileDevice = window.innerWidth < 768;
-
-          let width, height;
-
-          if (isFullScreenMode) {
-            // Fullscreen Mobile: Use vast majority of screen
-            width = Math.min(window.innerWidth * 0.95, 450);
-            height = window.innerHeight * 0.85;
-          } else if (isMobileDevice) {
-            width = 310;
-            height = 480;
-          } else {
-            width = 500;
-            height = 650;
-          }
-
-          pageFlip = new St.PageFlip(
-            flipbookEl,
-            {
-              width: width,
-              height: height,
-              size: "stretch",
-              minWidth: 300,
-              maxWidth: 1000,
-              minHeight: 400,
-              maxHeight: 1400,
-              maxShadowOpacity: 0.7,
-              showCover: true,
-              mobileScrollSupport: true,
-              flippingTime: 600,
-              usePortrait: isMobileDevice || isFullScreenMode,
-              startPage: 0,
-              drawShadow: true,
-              showPageCorners: true
-            }
-          );
-
-          pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-          const prevBtn = document.getElementById("prev-page");
-          const nextBtn = document.getElementById("next-page");
-
-          const newPrev = prevBtn.cloneNode(true);
-          const newNext = nextBtn.cloneNode(true);
-          prevBtn.parentNode.replaceChild(newPrev, prevBtn);
-          nextBtn.parentNode.replaceChild(newNext, nextBtn);
-
-          newPrev.addEventListener("click", () => pageFlip.flipPrev());
-          newNext.addEventListener("click", () => pageFlip.flipNext());
+      // Theme Logic
+      function updateThemeUI() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const mobileText = themeToggleBtnMobile?.querySelector('span');
+        if (mobileText) {
+          mobileText.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
         }
+      }
 
-        const isMobile = window.innerWidth < 768;
+      function toggleTheme() {
+        document.documentElement.classList.toggle('dark');
+        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        updateThemeUI();
+      }
 
-        if (isMobile) {
-          bookContainer.classList.add('mobile-hidden');
-          mobileTrigger.style.display = 'flex';
-        } else {
-          initBook(false);
-        }
+      themeToggleBtn?.addEventListener('click', toggleTheme);
+      themeToggleBtnMobile?.addEventListener('click', toggleTheme);
 
-        document.getElementById('open-fullscreen-menu').addEventListener('click', () => {
-          bookContainer.classList.remove('mobile-hidden');
-          bookContainer.classList.add('fullscreen-mode');
-          mobileTrigger.style.display = 'none';
-          closeBtn.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-          initBook(true);
-        });
-
-        document.getElementById('close-menu-btn').addEventListener('click', () => {
-          bookContainer.classList.remove('fullscreen-mode');
-          bookContainer.classList.add('mobile-hidden');
-          mobileTrigger.style.display = 'flex';
-          closeBtn.classList.add('hidden');
-          document.body.style.overflow = '';
-          if (pageFlip) {
-            pageFlip.destroy();
-            pageFlip = null;
-          }
-        });
+      mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
       });
 
-      // Hide hint overlay on first interaction
+      // PageFlip Logic
+      const bookWrapper = document.getElementById('book-container-wrapper');
+      const flipbookEl = document.getElementById('flipbook');
+      const mobileTrigger = document.getElementById('mobile-menu-trigger-wrap');
+      const openBtnMobile = document.getElementById('open-menu-mobile');
+      const closeBtn = document.getElementById('close-menu-btn');
+
+      function initBook(fullscreen = false) {
+        if (pageFlip) pageFlip.destroy();
+
+        const isMobileDevice = window.innerWidth < 768;
+        let width = 500, height = 650;
+
+        if (fullscreen) {
+          width = Math.min(window.innerWidth * 0.9, 450);
+          height = window.innerHeight * 0.8;
+        } else if (isMobileDevice) {
+          width = 320;
+          height = 480;
+        }
+
+        pageFlip = new St.PageFlip(flipbookEl, {
+          width, height,
+          size: "stretch",
+          minWidth: 300, maxWidth: 1000,
+          minHeight: 400, maxHeight: 1200,
+          showCover: true,
+          mobileScrollSupport: true,
+          usePortrait: isMobileDevice || fullscreen,
+          flippingTime: 600,
+          drawShadow: true,
+          showPageCorners: true
+        });
+
+        pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+        // Re-attach nav listeners
+        document.getElementById("prev-page").onclick = () => pageFlip.flipPrev();
+        document.getElementById("next-page").onclick = () => pageFlip.flipNext();
+      }
+
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        bookWrapper.classList.add('mobile-hidden');
+      } else {
+        mobileTrigger.style.display = 'none';
+        initBook(false);
+      }
+
+      openBtnMobile?.addEventListener('click', () => {
+        bookWrapper.classList.remove('mobile-hidden');
+        bookWrapper.classList.add('fullscreen-mode');
+        document.body.style.overflow = 'hidden';
+        closeBtn.classList.remove('hidden');
+        initBook(true);
+      });
+
+      closeBtn?.addEventListener('click', () => {
+        bookWrapper.classList.remove('fullscreen-mode');
+        bookWrapper.classList.add('mobile-hidden');
+        document.body.style.overflow = '';
+        closeBtn.classList.add('hidden');
+        if (pageFlip) pageFlip.destroy();
+      });
+
+      // Hint Logic
       function hideHint() {
         const overlay = document.getElementById('menu-hint-overlay');
         if (overlay) {
@@ -1023,18 +975,12 @@
         }
       }
 
-      pageFlip.on('flip', (e) => {
-        hideHint();
-      });
-
-      // Reveal hint when menu section is in view
+      // Observer for hint or other interactions
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Hint is visible by default, but we could trigger animations here
-          }
+          if (entry.isIntersecting) { /* Ready */ }
         });
-      }, { threshold: 0.5 });
+      }, { threshold: 0.1 });
       observer.observe(document.getElementById('menu'));
     });
   </script>
