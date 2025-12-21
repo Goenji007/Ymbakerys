@@ -72,8 +72,9 @@
     }
 
     .flip-book {
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      display: none; /* Hidden until initialized */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      display: none;
+      /* Hidden until initialized */
       background: white;
     }
 
@@ -132,7 +133,7 @@
       width: 150px;
       height: 150px;
       margin-bottom: 2rem;
-      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
     }
 
     .page-cover h2 {
@@ -143,6 +144,70 @@
     @media (max-width: 768px) {
       .book-container {
         padding: 1rem 0;
+      }
+    }
+
+    /* Interactivity Cues */
+    .corner-hint {
+      position: relative;
+    }
+
+    .corner-hint::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, transparent 50%, rgba(230, 126, 34, 0.4) 50%);
+      pointer-events: none;
+      animation: wiggle 2s infinite ease-in-out;
+      z-index: 100;
+    }
+
+    @keyframes wiggle {
+
+      0%,
+      100% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(-5deg) scale(1.1);
+      }
+    }
+
+    #menu-hint-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      backdrop-blur: 4px;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .hint-icon {
+      font-size: 3rem;
+      animation: swipe 2s infinite ease-in-out;
+    }
+
+    @keyframes swipe {
+      0% {
+        transform: translateX(50px) opacity(0);
+      }
+
+      50% {
+        transform: translateX(-50px) opacity(1);
+      }
+
+      100% {
+        transform: translateX(-100px) opacity(0);
       }
     }
   </style>
@@ -328,10 +393,18 @@
         <p class="text-gray-500 dark:text-gray-400 mt-4 italic">Desliza para cambiar de página</p>
       </div>
 
-      <div class="book-container">
+      <div class="book-container relative">
+        <!-- Hint Overlay -->
+        <div id="menu-hint-overlay" class="rounded-xl">
+          <div class="hint-icon mb-4">
+            <i class="fas fa-hand-pointer"></i>
+          </div>
+          <p class="font-bold text-lg">Desliza para hojear</p>
+        </div>
+
         <div class="flip-book" id="flipbook">
           <!-- Cover -->
-          <div class="page page-cover" data-density="hard">
+          <div class="page page-cover corner-hint" data-density="hard">
             <div class="page-content">
               <img src="assets/img/logo.png" alt="Logo">
               <h2 class="font-display">Menú Dulce</h2>
@@ -345,22 +418,26 @@
             <div class="page-content">
               <div class="page-header">Flanes</div>
               <ul class="space-y-6">
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <div class="flex flex-col">
                     <span class="font-bold">Tradicional Porción</span>
                     <span class="text-xs text-gray-500">Receta de la abuela</span>
                   </div>
                   <span class="font-bold text-primary">$125.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span class="font-bold">Tradicional Completo</span>
                   <span class="font-bold text-primary">$1,500.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span class="font-bold">Chocolate Porción</span>
                   <span class="font-bold text-primary">$150.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span class="font-bold">Chocolate Completo</span>
                   <span class="font-bold text-primary">$1,850.00</span>
                 </li>
@@ -375,27 +452,32 @@
               <div class="page-header">Chocoflan & Brownies</div>
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Chocoflan</h4>
               <ul class="space-y-4 mb-8">
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Porción</span>
                   <span class="font-bold text-primary">$200.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Completo</span>
                   <span class="font-bold text-primary">$2,500.00</span>
                 </li>
               </ul>
-              
+
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Brownies</h4>
               <ul class="space-y-4">
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Brownie de Oreo</span>
                   <span class="font-bold text-primary">$80.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Red Velvet</span>
                   <span class="font-bold text-primary">$90.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Pudín de Pan</span>
                   <span class="font-bold text-primary">$75.00</span>
                 </li>
@@ -410,11 +492,13 @@
               <div class="page-header">Tres Leches & Galletas</div>
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Tres Leches</h4>
               <ul class="space-y-4 mb-8">
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Tradicional</span>
                   <span class="font-bold text-primary">$150.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Chocolate</span>
                   <span class="font-bold text-primary">$180.00</span>
                 </li>
@@ -422,19 +506,23 @@
 
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Galletas</h4>
               <ul class="space-y-4">
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Rellena de Dulce de leche</span>
                   <span class="font-bold text-primary">$60.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Chispas de Chocolate</span>
                   <span class="font-bold text-primary">$60.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Galletas de Mantequilla</span>
                   <span class="font-bold text-primary">$50.00</span>
                 </li>
-                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                <li
+                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
                   <span>Deditos (Docena)</span>
                   <span class="font-bold text-primary">$275.00</span>
                 </li>
@@ -457,9 +545,15 @@
         </div>
       </div>
 
-      <div class="mt-8 flex justify-center gap-4 md:hidden">
-        <button id="prev-page" class="bg-primary text-white p-3 rounded-full shadow-lg"><i class="fas fa-chevron-left"></i></button>
-        <button id="next-page" class="bg-primary text-white p-3 rounded-full shadow-lg"><i class="fas fa-chevron-right"></i></button>
+      <div class="mt-8 flex justify-center gap-6">
+        <button id="prev-page"
+          class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <button id="next-page"
+          class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
 
       <div class="mt-12 text-center">
@@ -685,12 +779,31 @@
 
       document.getElementById("next-page").addEventListener("click", () => {
         pageFlip.flipNext();
+        hideHint();
       });
 
-      // Update responsiveness on resize
-      window.addEventListener('resize', () => {
-        // The library handles stretching automatically if size: "stretch" is set
+      // Hide hint overlay on first interaction
+      function hideHint() {
+        const overlay = document.getElementById('menu-hint-overlay');
+        if (overlay) {
+          overlay.style.opacity = '0';
+          setTimeout(() => overlay.remove(), 500);
+        }
+      }
+
+      pageFlip.on('flip', (e) => {
+        hideHint();
       });
+
+      // Reveal hint when menu section is in view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Hint is visible by default, but we could trigger animations here
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(document.getElementById('menu'));
     });
   </script>
 </body>
