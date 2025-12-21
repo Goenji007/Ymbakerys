@@ -238,27 +238,50 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.9);
-        /* Dark backdrop */
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         z-index: 9999;
-        padding: 1rem;
         display: flex !important;
+        flex-direction: column !important;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+      }
+
+      .book-container.fullscreen-mode #flipbook {
+        margin: auto 0 !important;
+      }
+
+      .book-container.fullscreen-mode #nav-buttons-container {
+        position: absolute;
+        bottom: 5vh;
+        left: 0;
+        right: 0;
+        z-index: 10002;
+        margin: 0 !important;
+      }
+
+      .book-container.fullscreen-mode .mt-12 {
+        display: none !important;
       }
 
       /* In Fullscreen, let pages be big and readable */
       .book-container.fullscreen-mode .page {
         font-size: 1rem !important;
         padding: 1.5rem !important;
-        /* Restore original page styles */
+        box-shadow: none !important;
+        border: none !important;
       }
 
       .book-container.fullscreen-mode .page img {
         object-fit: contain !important;
         max-height: 250px !important;
-        /* Larger images allowed */
         margin: 0.5rem 0 !important;
+      }
+
+      body.modal-open .fixed-whatsapp {
+        display: none !important;
       }
 
       /* Mobile Trigger Button Styles */
@@ -860,7 +883,7 @@
     </div>
   </footer>
 
-  <a class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center animate-bounce duration-[2000ms]"
+  <a class="fixed-whatsapp fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center animate-bounce duration-[2000ms]"
     href="https://wa.me/18298352169" target="_blank">
     <i class="fab fa-whatsapp text-3xl"></i>
   </a>
@@ -953,6 +976,7 @@
       openBtnMobile?.addEventListener('click', () => {
         bookWrapper.classList.remove('mobile-hidden');
         bookWrapper.classList.add('fullscreen-mode');
+        document.body.classList.add('modal-open');
         document.body.style.overflow = 'hidden';
         closeBtn.classList.remove('hidden');
         initBook(true);
@@ -961,6 +985,7 @@
       closeBtn?.addEventListener('click', () => {
         bookWrapper.classList.remove('fullscreen-mode');
         bookWrapper.classList.add('mobile-hidden');
+        document.body.classList.remove('modal-open');
         document.body.style.overflow = '';
         closeBtn.classList.add('hidden');
         if (pageFlip) pageFlip.destroy();
