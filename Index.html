@@ -26,10 +26,20 @@
             "surface-dark": "#3D2222", // Lighter reddish brown surface
             "text-light": "#5D2E2E", // Dark reddish brown text
             "text-dark": "#F5E6E6", // Light rose-white text
+            'bakery-cream': '#fdf5e6',
+            'bakery-rose': '#b07c7c',
+            'bakery-rose-dark': '#966363',
+            'bakery-brown': '#4a3b3b',
+            'bakery-card-bg': '#fae3e3',
           },
           fontFamily: {
             display: ["'Playfair Display'", "serif"],
             body: ["'Lato'", "sans-serif"],
+            'serif': ['"Playfair Display"', 'serif'],
+            'sans': ['"Lato"', 'sans-serif'],
+          },
+          backgroundImage: {
+            'parchment': 'url("https://www.transparenttextures.com/patterns/aged-paper.png")',
           },
           borderRadius: {
             DEFAULT: "0.75rem",
@@ -37,6 +47,7 @@
         },
       },
     };
+
   </script>
   <style>
     ::-webkit-scrollbar {
@@ -60,6 +71,34 @@
     .dark .hero-pattern {
       background-color: #1C1917;
       background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+    }
+
+    /* New Bakery Modal Styles */
+    .backdrop-blur-custom {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #b07c7c;
+      border-radius: 4px;
+    }
+
+    #mobile-menu-modal {
+      display: none;
+      z-index: 10000;
+    }
+
+    #mobile-menu-modal.active {
+      display: flex;
     }
 
     /* Flipbook Styles */
@@ -565,9 +604,128 @@
         </div>
       </div>
 
-      <!-- Book Container Modal -->
-      <div id="book-container-wrapper" class="book-container relative">
-        <!-- Close Button (Fullscreen only) -->
+      <!-- Mobile Menu Modal (New Redesign) -->
+
+      <div id="mobile-menu-modal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-custom items-center justify-center p-4">
+        <main
+          class="w-full h-[85vh] max-h-[800px] bg-bakery-cream bg-parchment flex flex-col rounded-3xl overflow-hidden shadow-2xl relative max-w-[400px]">
+          <!-- Top Bar -->
+          <div class="h-10 bg-bakery-rose flex items-center justify-end px-4">
+            <button id="close-modal-mobile" class="text-white hover:text-gray-200 transition-colors">
+              <i class="fas fa-times-circle text-xl"></i>
+            </button>
+          </div>
+
+          <!-- Navigation Strip -->
+          <nav class="border-b border-bakery-rose/20 py-2 px-2 overflow-x-auto whitespace-nowrap bg-bakery-card-bg">
+            <ul class="flex justify-start space-x-4 text-[11px] font-sans text-bakery-brown font-bold tracking-wide">
+              <li><a class="hover:text-bakery-rose border-b-2 border-bakery-rose pb-0.5" href="#home">Inicio</a></li>
+              <li><a class="hover:text-bakery-rose" href="#flanes">Flanes</a></li>
+              <li><a class="hover:text-bakery-rose" href="#chocoflan">Chocoflan</a></li>
+              <li><a class="hover:text-bakery-rose" href="#brownies">Brownies</a></li>
+              <li><a class="hover:text-bakery-rose" href="#cookies">Galletas</a></li>
+            </ul>
+          </nav>
+
+          <!-- Scrollable Content -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar p-5">
+            <header class="text-center mb-8 mt-2">
+              <h1 class="font-serif text-2xl text-bakery-brown leading-tight font-bold">
+                MENÚ DULCE<br />
+                <span class="text-3xl text-bakery-rose">YM BAKERY'S</span>
+              </h1>
+            </header>
+
+            <!-- Hero Section -->
+            <section class="mb-10 text-center relative">
+              <div class="rounded-2xl overflow-hidden shadow-lg mb-4">
+                <img src="assets/img/hero-image.jpg" alt="YM Bakery Hero" class="w-full object-cover h-[200px]">
+              </div>
+              <h2 class="font-serif text-xl text-bakery-brown mb-2 font-bold italic">Nuestras Delicias</h2>
+              <p class="font-sans text-xs text-bakery-brown/80 mb-5 px-2 leading-relaxed">
+                Elaborados con ingredientes frescos y mucho amor, una explosión de sabor en cada bocado.
+              </p>
+              <a href="https://wa.me/18298352169" target="_blank"
+                class="bg-bakery-rose text-white text-[10px] font-bold py-2 px-8 rounded-full uppercase tracking-wider hover:bg-bakery-rose-dark transition-colors shadow-md inline-block">
+                Haz tu pedido
+              </a>
+            </section>
+
+            <!-- Product List -->
+            <div class="space-y-6">
+              <!-- Item 1: Flanes -->
+              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
+                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
+                  <img src="assets/img/flan-strawberry.jpg" alt="Flanes"
+                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Flanes Caseros</h3>
+                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
+                    Tradicionales y cremosos, la receta de la abuela en tu mesa.
+                  </p>
+                  <span class="text-bakery-rose font-bold text-xs">Desde $125.00</span>
+                </div>
+              </article>
+
+              <!-- Item 2: Chocoflan -->
+              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
+                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
+                  <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan"
+                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Chocoflan Oreo</h3>
+                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
+                    La combinación perfecta de bizcocho de chocolate y flan.
+                  </p>
+                  <span class="text-bakery-rose font-bold text-xs">Desde $200.00</span>
+                </div>
+              </article>
+
+              <!-- Item 3: Brownies -->
+              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
+                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
+                  <img src="assets/img/brownie-oreo.jpg" alt="Brownies"
+                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
+                </div>
+                <div class="flex-1 flex flex-col justify-center">
+                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Brownies Melcochos</h3>
+                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
+                    Oreo, Red Velvet y más. La dosis perfecta de chocolate.
+                  </p>
+                  <span class="text-bakery-rose font-bold text-xs">Desde $80.00</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="h-8"></div>
+          </div>
+
+          <!-- Bottom Footer -->
+          <footer class="bg-bakery-rose h-16 flex items-center justify-around px-4 shadow-inner">
+            <button class="flex flex-col items-center text-white/90 hover:text-white transition">
+              <i class="fas fa-search text-lg mb-1"></i>
+              <span class="text-[10px] font-sans">Buscar</span>
+            </button>
+            <a href="https://wa.me/18298352169"
+              class="flex flex-col items-center text-white/90 hover:text-white transition">
+              <i class="fab fa-whatsapp text-xl mb-1"></i>
+              <span class="text-[10px] font-sans">WhatsApp</span>
+            </a>
+            <a href="https://www.instagram.com/ym_bakerys"
+              class="flex flex-col items-center text-white/90 hover:text-white transition">
+              <i class="fab fa-instagram text-lg mb-1"></i>
+              <span class="text-[10px] font-sans">Instagram</span>
+            </a>
+          </footer>
+        </main>
+      </div>
+
+      <!-- Book Container for Desktop -->
+      <div id="book-container-wrapper" class="book-container relative hidden md:flex">
+        <!-- Close Button (Fullscreen only - not used for new mobile modal but kept for desktop logic) -->
         <button id="close-menu-btn"
           class="hidden fixed top-6 right-6 z-[10001] text-white bg-black/50 hover:bg-black/70 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md transition-all">
           <i class="fas fa-times text-2xl"></i>
@@ -923,35 +1081,38 @@
         icon.classList.toggle('fa-times');
       });
 
-      // PageFlip Logic
+      // New Mobile Modal Logic
+      const mobileTrigger = document.getElementById('open-menu-mobile');
+      const mobileModal = document.getElementById('mobile-menu-modal');
+      const closeModalMobile = document.getElementById('close-modal-mobile');
+
+      mobileTrigger?.addEventListener('click', () => {
+        mobileModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeModalMobile?.addEventListener('click', () => {
+        mobileModal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      // PageFlip Logic (Mainly for Desktop)
       const bookWrapper = document.getElementById('book-container-wrapper');
       const flipbookEl = document.getElementById('flipbook');
-      const mobileTrigger = document.getElementById('mobile-menu-trigger-wrap');
-      const openBtnMobile = document.getElementById('open-menu-mobile');
       const closeBtn = document.getElementById('close-menu-btn');
 
-      function initBook(fullscreen = false) {
+      function initBook() {
         if (pageFlip) pageFlip.destroy();
-
-        const isMobileDevice = window.innerWidth < 768;
-        let width = 500, height = 650;
-
-        if (fullscreen) {
-          width = Math.min(window.innerWidth * 0.9, 450);
-          height = window.innerHeight * 0.8;
-        } else if (isMobileDevice) {
-          width = 320;
-          height = 480;
-        }
+        if (window.innerWidth < 768) return;
 
         pageFlip = new St.PageFlip(flipbookEl, {
-          width, height,
+          width: 500, height: 650,
           size: "stretch",
           minWidth: 300, maxWidth: 1000,
           minHeight: 400, maxHeight: 1200,
           showCover: true,
           mobileScrollSupport: true,
-          usePortrait: isMobileDevice || fullscreen,
+          usePortrait: false,
           flippingTime: 600,
           drawShadow: true,
           showPageCorners: true
@@ -959,37 +1120,17 @@
 
         pageFlip.loadFromHTML(document.querySelectorAll(".page"));
 
-        // Re-attach nav listeners
-        document.getElementById("prev-page").onclick = () => pageFlip.flipPrev();
-        document.getElementById("next-page").onclick = () => pageFlip.flipNext();
+        const prevPageBtn = document.getElementById("prev-page");
+        const nextPageBtn = document.getElementById("next-page");
+        if (prevPageBtn) prevPageBtn.onclick = () => pageFlip.flipPrev();
+        if (nextPageBtn) nextPageBtn.onclick = () => pageFlip.flipNext();
       }
 
       const isMobile = window.innerWidth < 768;
 
-      if (isMobile) {
-        bookWrapper.classList.add('mobile-hidden');
-      } else {
-        mobileTrigger.style.display = 'none';
-        initBook(false);
+      if (!isMobile) {
+        initBook();
       }
-
-      openBtnMobile?.addEventListener('click', () => {
-        bookWrapper.classList.remove('mobile-hidden');
-        bookWrapper.classList.add('fullscreen-mode');
-        document.body.classList.add('modal-open');
-        document.body.style.overflow = 'hidden';
-        closeBtn.classList.remove('hidden');
-        initBook(true);
-      });
-
-      closeBtn?.addEventListener('click', () => {
-        bookWrapper.classList.remove('fullscreen-mode');
-        bookWrapper.classList.add('mobile-hidden');
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-        closeBtn.classList.add('hidden');
-        if (pageFlip) pageFlip.destroy();
-      });
 
       // Hint Logic
       function hideHint() {
