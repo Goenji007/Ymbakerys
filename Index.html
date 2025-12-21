@@ -220,6 +220,34 @@
       .book-container {
         padding: 1rem 0;
       }
+
+      /* Hide spine on mobile */
+      .flip-book::after {
+        display: none !important;
+      }
+
+      /* Reset page styles for single view on mobile */
+      .page,
+      .page:nth-child(even),
+      .page:nth-child(odd) {
+        border: 1px solid #e5e7eb !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 12px;
+      }
+
+      .dark .page,
+      .dark .page:nth-child(even),
+      .dark .page:nth-child(odd) {
+        border-color: #444 !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+      }
+
+      /* Remove lighting effects on mobile */
+      .page::before,
+      .page:nth-child(even)::before,
+      .page:nth-child(odd)::before {
+        display: none !important;
+      }
     }
 
     /* Interactivity Cues */
@@ -262,7 +290,8 @@
       justify-content: center;
       align-items: center;
       color: white;
-      backdrop-blur: 4px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       transition: opacity 0.5s ease;
       pointer-events: none;
     }
