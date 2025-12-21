@@ -61,6 +61,90 @@
       background-color: #1C1917;
       background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
     }
+
+    /* Flipbook Styles */
+    .book-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+      padding: 2rem 0;
+    }
+
+    .flip-book {
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      display: none; /* Hidden until initialized */
+      background: white;
+    }
+
+    .page {
+      padding: 2rem;
+      background-color: #fff;
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+
+    .dark .page {
+      background-color: #292524;
+      border-color: #444;
+    }
+
+    .page-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #E67E22;
+      border-bottom: 2px solid #E67E22;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 1rem;
+      width: calc(100% - 4rem);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .stf__parent {
+      background-color: transparent !important;
+    }
+
+    .page-cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #E67E22, #d35400);
+      color: white;
+    }
+
+    .page-cover img {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+    }
+
+    .page-cover h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .book-container {
+        padding: 1rem 0;
+      }
+    }
   </style>
 </head>
 
@@ -234,110 +318,150 @@
     </div>
   </section>
 
-  <section class="py-20 relative" id="menu">
+  <section class="py-20 relative overflow-hidden" id="menu">
     <div
       class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none">
     </div>
-    <div class="container mx-auto px-6 relative z-10 text-left">
-      <div class="text-center mb-16">
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white">Nuestro Menú</h2>
-        <p class="text-gray-500 dark:text-gray-400 mt-4">Precios en DOP</p>
+        <p class="text-gray-500 dark:text-gray-400 mt-4 italic">Desliza para cambiar de página</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
-          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Flan
-            Tradicional y de Chocolate</h3>
-          <ul class="space-y-4">
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Tradicional Porción</span>
-              <span class="font-bold">$125.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Tradicional Completo</span>
-              <span class="font-bold">$1,500.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Chocolate Porción</span>
-              <span class="font-bold">$150.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Chocolate Completo</span>
-              <span class="font-bold">$1,850.00</span>
-            </li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
-          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Chocoflan
-          </h3>
-          <ul class="space-y-4">
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Porción</span>
-              <span class="font-bold">$200.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Completo</span>
-              <span class="font-bold">$2,500.00</span>
-            </li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
-          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Brownies</h3>
-          <ul class="space-y-4">
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Brownie de Oreo</span>
-              <span class="font-bold">$80.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Red Velvet</span>
-              <span class="font-bold">$90.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Pudín de Pan</span>
-              <span class="font-bold">$75.00</span>
-            </li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary">
-          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Tres Leches
-          </h3>
-          <ul class="space-y-4">
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Tradicional</span>
-              <span class="font-bold">$150.00</span>
-            </li>
-            <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-              <span>Chocolate</span>
-              <span class="font-bold">$180.00</span>
-            </li>
-          </ul>
-        </div>
-        <div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-l-4 border-primary md:col-span-2">
-          <h3 class="text-2xl font-display font-bold text-primary mb-6 border-b dark:border-gray-700 pb-2">Galletas
-            &amp; Otros</h3>
-          <div class="grid md:grid-cols-2 gap-6">
-            <ul class="space-y-4">
-              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-                <span>Rellena de Dulce de leche</span>
-                <span class="font-bold">$60.00</span>
-              </li>
-              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-                <span>Chispas de Chocolate</span>
-                <span class="font-bold">$60.00</span>
-              </li>
-            </ul>
-            <ul class="space-y-4">
-              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-                <span>Galletas de Mantequilla</span>
-                <span class="font-bold">$50.00</span>
-              </li>
-              <li class="flex justify-between items-center text-gray-700 dark:text-gray-200">
-                <span>Deditos (Docena)</span>
-                <span class="font-bold">$275.00</span>
-              </li>
-            </ul>
+
+      <div class="book-container">
+        <div class="flip-book" id="flipbook">
+          <!-- Cover -->
+          <div class="page page-cover" data-density="hard">
+            <div class="page-content">
+              <img src="assets/img/logo.png" alt="Logo">
+              <h2 class="font-display">Menú Dulce</h2>
+              <p>YM Bakery's</p>
+              <div class="mt-8 text-sm opacity-80">Cotuí, RD</div>
+            </div>
+          </div>
+
+          <!-- Page 1: Flanes -->
+          <div class="page">
+            <div class="page-content">
+              <div class="page-header">Flanes</div>
+              <ul class="space-y-6">
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <div class="flex flex-col">
+                    <span class="font-bold">Tradicional Porción</span>
+                    <span class="text-xs text-gray-500">Receta de la abuela</span>
+                  </div>
+                  <span class="font-bold text-primary">$125.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span class="font-bold">Tradicional Completo</span>
+                  <span class="font-bold text-primary">$1,500.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span class="font-bold">Chocolate Porción</span>
+                  <span class="font-bold text-primary">$150.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span class="font-bold">Chocolate Completo</span>
+                  <span class="font-bold text-primary">$1,850.00</span>
+                </li>
+              </ul>
+              <div class="page-footer">1</div>
+            </div>
+          </div>
+
+          <!-- Page 2: Chocoflan & Brownies -->
+          <div class="page">
+            <div class="page-content">
+              <div class="page-header">Chocoflan & Brownies</div>
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Chocoflan</h4>
+              <ul class="space-y-4 mb-8">
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Porción</span>
+                  <span class="font-bold text-primary">$200.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Completo</span>
+                  <span class="font-bold text-primary">$2,500.00</span>
+                </li>
+              </ul>
+              
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Brownies</h4>
+              <ul class="space-y-4">
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Brownie de Oreo</span>
+                  <span class="font-bold text-primary">$80.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Red Velvet</span>
+                  <span class="font-bold text-primary">$90.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Pudín de Pan</span>
+                  <span class="font-bold text-primary">$75.00</span>
+                </li>
+              </ul>
+              <div class="page-footer">2</div>
+            </div>
+          </div>
+
+          <!-- Page 3: Tres Leches & Cookies -->
+          <div class="page">
+            <div class="page-content">
+              <div class="page-header">Tres Leches & Galletas</div>
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Tres Leches</h4>
+              <ul class="space-y-4 mb-8">
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Tradicional</span>
+                  <span class="font-bold text-primary">$150.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Chocolate</span>
+                  <span class="font-bold text-primary">$180.00</span>
+                </li>
+              </ul>
+
+              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Galletas</h4>
+              <ul class="space-y-4">
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Rellena de Dulce de leche</span>
+                  <span class="font-bold text-primary">$60.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Chispas de Chocolate</span>
+                  <span class="font-bold text-primary">$60.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Galletas de Mantequilla</span>
+                  <span class="font-bold text-primary">$50.00</span>
+                </li>
+                <li class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
+                  <span>Deditos (Docena)</span>
+                  <span class="font-bold text-primary">$275.00</span>
+                </li>
+              </ul>
+              <div class="page-footer">3</div>
+            </div>
+          </div>
+
+          <!-- Back Cover -->
+          <div class="page page-cover" data-density="hard">
+            <div class="page-content">
+              <h3 class="font-display text-2xl mb-4">¡Gracias por elegirnos!</h3>
+              <p class="text-sm">Cada pedido es preparado con ingredientes frescos y mucho amor.</p>
+              <div class="mt-12 flex flex-col gap-4">
+                <span class="text-xs uppercase tracking-widest">Contáctanos</span>
+                <span class="font-bold">829-835-2169</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="mt-8 flex justify-center gap-4 md:hidden">
+        <button id="prev-page" class="bg-primary text-white p-3 rounded-full shadow-lg"><i class="fas fa-chevron-left"></i></button>
+        <button id="next-page" class="bg-primary text-white p-3 rounded-full shadow-lg"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
       <div class="mt-12 text-center">
         <a class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#1faa51] transition shadow-xl hover:scale-105 transform"
           href="https://wa.me/18298352169" target="_blank">
@@ -493,6 +617,7 @@
     <i class="fab fa-whatsapp text-3xl"></i>
   </a>
 
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
   <script>
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
@@ -529,6 +654,43 @@
     themeToggleBtnMobile?.addEventListener('click', toggleTheme);
     mobileMenuBtn?.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    // Page Flip Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageFlip = new St.PageFlip(
+        document.getElementById("flipbook"),
+        {
+          width: 400, // base page width
+          height: 550, // base page height
+          size: "stretch",
+          minWidth: 315,
+          maxWidth: 1000,
+          minHeight: 420,
+          maxHeight: 1350,
+          maxShadowOpacity: 0.5,
+          showCover: true,
+          mobileScrollSupport: false // create custom buttons for mobile
+        }
+      );
+
+      // load pages
+      pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+      document.getElementById("flipbook").style.display = "block";
+
+      document.getElementById("prev-page").addEventListener("click", () => {
+        pageFlip.flipPrev();
+      });
+
+      document.getElementById("next-page").addEventListener("click", () => {
+        pageFlip.flipNext();
+      });
+
+      // Update responsiveness on resize
+      window.addEventListener('resize', () => {
+        // The library handles stretching automatically if size: "stretch" is set
+      });
     });
   </script>
 </body>
