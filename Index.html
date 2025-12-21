@@ -249,7 +249,10 @@
         border: 1px solid #e5e7eb !important;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
         border-radius: 12px;
-        padding: 1.5rem !important;
+        padding: 1rem !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 600px;
       }
 
       .dark .page,
@@ -538,9 +541,9 @@
               </ul>
               <div class="grid grid-cols-2 gap-2 mt-4">
                 <img src="assets/img/flan-strawberry.jpg" alt="Flan Completo"
-                  class="w-full h-24 object-cover rounded-lg shadow-sm">
+                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
                 <img src="assets/img/flan-containers.jpg" alt="Flanes Individuales"
-                  class="w-full h-24 object-cover rounded-lg shadow-sm">
+                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
               </div>
               <div class="page-footer"></div>
             </div>
@@ -551,7 +554,7 @@
             <div class="page-content">
               <div class="page-header">Chocoflan & Brownies</div>
               <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan"
-                class="w-full h-24 object-cover rounded-lg mb-4 shadow-sm">
+                class="w-full h-32 object-contain rounded-lg mb-4 shadow-sm bg-white">
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Chocoflan</h4>
               <ul class="space-y-4 mb-8">
                 <li
@@ -567,7 +570,7 @@
               </ul>
 
               <img src="assets/img/brownie-oreo.jpg" alt="Brownies"
-                class="w-full h-24 object-cover rounded-lg mb-2 shadow-sm">
+                class="w-full h-24 object-contain rounded-lg mb-2 shadow-sm bg-white">
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4">Brownies</h4>
               <ul class="space-y-4">
                 <li
@@ -597,7 +600,7 @@
               <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 mobile-compact-header">Tres
                 Leches</h4>
               <img src="assets/img/chocoflan-cherry.jpg" alt="Tres Leches"
-                class="w-full h-24 object-cover rounded-lg mb-4 shadow-sm">
+                class="w-full h-24 object-contain rounded-lg mb-4 shadow-sm bg-white">
               <ul class="space-y-4 mb-6 mobile-compact-list">
                 <li
                   class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
@@ -637,9 +640,9 @@
               </ul>
               <div class="grid grid-cols-2 gap-2 mt-2">
                 <img src="assets/img/cookies-powder.jpg" alt="Polvorones"
-                  class="w-full h-24 object-cover rounded-lg shadow-sm">
+                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
                 <img src="assets/img/alfajores-bag.jpg" alt="Alfajores"
-                  class="w-full h-24 object-cover rounded-lg shadow-sm">
+                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
               </div>
               <div class="page-footer"></div>
             </div>
@@ -883,7 +886,7 @@
           size: "stretch",
           minWidth: 315,
           maxWidth: 1000,
-          minHeight: 420,
+          minHeight: 600,
           maxHeight: 1350,
           maxShadowOpacity: 0.7,
           showCover: true,
