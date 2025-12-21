@@ -315,7 +315,7 @@
       </button>
     </div>
     <div
-      class="hidden md:hidden bg-surface-light dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 p-4"
+      class="hidden md:hidden absolute left-0 top-full w-full bg-surface-light dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 p-4 shadow-xl transition-all duration-300"
       id="mobile-menu">
       <div class="flex flex-col space-y-4">
         <a class="block hover:text-primary" href="#about">Nosotros</a>
@@ -823,10 +823,19 @@
     themeToggleBtnMobile?.addEventListener('click', toggleTheme);
     mobileMenuBtn?.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      }
     });
 
     // Page Flip Initialization
     document.addEventListener('DOMContentLoaded', () => {
+      const isMobile = window.innerWidth < 768;
       const pageFlip = new St.PageFlip(
         document.getElementById("flipbook"),
         {
@@ -839,9 +848,9 @@
           maxHeight: 1350,
           maxShadowOpacity: 0.7,
           showCover: true,
-          mobileScrollSupport: false,
+          mobileScrollSupport: true,
           flippingTime: 850,
-          usePortrait: false,
+          usePortrait: isMobile,
           startPage: 0,
           drawShadow: true,
           showPageCorners: true
