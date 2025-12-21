@@ -227,9 +227,33 @@
       }
 
       .page {
-        padding: 1rem !important;
+        padding: 0.75rem !important;
+        /* Compact padding */
         overflow-y: auto !important;
         border: 1px solid #e5e7eb;
+      }
+
+      /* Compact text for mobile */
+      .page-header {
+        font-size: 1.25rem !important;
+        /* Smaller header */
+        margin-bottom: 0.5rem !important;
+      }
+
+      .page h4 {
+        font-size: 0.75rem !important;
+        /* Smaller subheaders */
+        margin-bottom: 0.25rem !important;
+      }
+
+      .page li {
+        font-size: 0.8rem !important;
+        /* Smaller list text */
+        padding-bottom: 0.25rem !important;
+      }
+
+      .page .text-xs {
+        font-size: 0.65rem !important;
       }
 
       .dark .page {
@@ -244,8 +268,11 @@
 
       .page img {
         object-fit: contain !important;
-        max-height: 200px;
+        max-height: 140px;
+        /* Reduced max height */
         background-color: white;
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.5rem !important;
       }
     }
 
@@ -862,8 +889,9 @@
       const pageFlip = new St.PageFlip(
         document.getElementById("flipbook"),
         {
-          width: 500, // base page width
-          height: 650, // base page height
+          width: isMobile ? 310 : 500, // Narrower for mobile portrait
+          height: isMobile ? 550 : 650, // Taller portrait ratio
+
           size: "stretch",
           minWidth: 315,
           maxWidth: 1000,
