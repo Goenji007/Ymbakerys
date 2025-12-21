@@ -218,55 +218,61 @@
 
     @media (max-width: 768px) {
       .book-container {
-        padding: 0.5rem 0;
+        padding: 0;
       }
 
-      .mobile-compact-list .flex {
-        padding-bottom: 0.25rem !important;
+      /* Disable Flipbook style on mobile, convert to list */
+      .flip-book {
+        display: flex !important;
+        flex-direction: column;
+        gap: 2rem;
+        box-shadow: none !important;
+        background: transparent !important;
       }
 
-      .mobile-compact-list.space-y-4> :not([hidden])~ :not([hidden]) {
-        margin-top: 0.75rem !important;
-      }
-
-      .mobile-compact-list.space-y-3> :not([hidden])~ :not([hidden]) {
-        margin-top: 0.5rem !important;
-      }
-
-      .mobile-compact-header {
-        margin-bottom: 0.5rem !important;
-      }
-
-      /* Hide spine on mobile */
       .flip-book::after {
         display: none !important;
       }
 
-      /* Reset page styles for single view on mobile */
-      .page,
-      .page:nth-child(even),
-      .page:nth-child(odd) {
-        border: 1px solid #e5e7eb !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
-        border-radius: 12px;
-        padding: 1rem !important;
-        overflow-y: auto !important;
+      /* Card style for mobile pages */
+      .page {
+        position: relative !important;
+        width: 100% !important;
         height: auto !important;
-        min-height: 600px;
+        min-height: auto !important;
+        left: auto !important;
+        top: auto !important;
+        border-radius: 1rem !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 0;
+        background-color: white !important;
+        opacity: 1 !important;
+        transform: none !important;
+        padding: 1.5rem !important;
       }
 
-      .dark .page,
-      .dark .page:nth-child(even),
-      .dark .page:nth-child(odd) {
-        border-color: #444 !important;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+      .dark .page {
+        background-color: #1f2937 !important;
+        border: 1px solid #374151 !important;
       }
 
-      /* Remove lighting effects on mobile */
+      /* Hide spine/lighting effects */
       .page::before,
       .page:nth-child(even)::before,
       .page:nth-child(odd)::before {
         display: none !important;
+      }
+
+      /* Adjust images on mobile */
+      .page img {
+        height: auto !important;
+        max-height: 250px;
+        object-fit: cover !important;
+      }
+
+      /* Hide cover pages on mobile if desired, or style them differently */
+      .page-cover {
+        min-height: 300px;
       }
     }
 
@@ -662,7 +668,7 @@
         </div>
       </div>
 
-      <div class="mt-8 flex justify-center gap-6">
+      <div class="mt-8 flex justify-center gap-6 md:flex hidden">
         <button id="prev-page"
           class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
           <i class="fas fa-arrow-left"></i>
@@ -878,6 +884,20 @@
     // Page Flip Initialization
     document.addEventListener('DOMContentLoaded', () => {
       const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        // Mobile View: Remove Flipbook ID to prevent JS errors if referenced elsewhere, 
+        // or just rely on CSS to stack them.
+        // We do NOT initialize PageFlip for mobile.
+        document.getElementById("flipbook").style.display = "flex";
+
+        // Hide "Swipe" hint text on mobile since it's vertical scrolling
+        const hintText = document.querySelector('#menu p.italic');
+        if (hintText) hintText.style.display = 'none';
+
+        return;
+      }
+
       const pageFlip = new St.PageFlip(
         document.getElementById("flipbook"),
         {
