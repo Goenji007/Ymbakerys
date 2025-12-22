@@ -277,15 +277,14 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.98);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        z-index: 9999;
+        background: #1a1a1a;
+        z-index: 10000;
         display: flex !important;
         flex-direction: column !important;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        padding: 1rem;
       }
 
       .book-container.fullscreen-mode #flipbook {
@@ -1024,7 +1023,7 @@
       <div class="flex flex-col md:flex-row justify-between items-center mb-12">
         <div class="mb-6 md:mb-0 text-center md:text-left">
           <div class="text-3xl font-display font-bold text-primary mb-2">YM Bakery's</div>
-          <p class="text-gray-400">Hechoooooo con amor en cada detalle.</p>
+          <p class="text-gray-400">Hecho con amor en cada detalle.</p>
         </div>
         <div class="flex gap-6">
           <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"
@@ -1085,10 +1084,24 @@
       const mobileTrigger = document.getElementById('open-menu-mobile');
       const mobileModal = document.getElementById('mobile-menu-modal');
       const closeModalMobile = document.getElementById('close-modal-mobile');
+      const bookWrapper = document.getElementById('book-container-wrapper');
+      const closeBtn = document.getElementById('close-menu-btn');
 
       mobileTrigger?.addEventListener('click', () => {
-        mobileModal.classList.add('active');
+        // Abrir el menú revista en lugar del modal de lista
+        bookWrapper.classList.add('fullscreen-mode');
+        closeBtn.classList.remove('hidden');
+        document.body.classList.add('modal-open');
         document.body.style.overflow = 'hidden';
+
+        initBook();
+      });
+
+      closeBtn?.addEventListener('click', () => {
+        bookWrapper.classList.remove('fullscreen-mode');
+        closeBtn.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
       });
 
       closeModalMobile?.addEventListener('click', () => {
@@ -1096,26 +1109,27 @@
         document.body.style.overflow = '';
       });
 
-      // PageFlip Logic (Mainly for Desktop)
-      const bookWrapper = document.getElementById('book-container-wrapper');
+      // PageFlip Logic
       const flipbookEl = document.getElementById('flipbook');
-      const closeBtn = document.getElementById('close-menu-btn');
 
       function initBook() {
         if (pageFlip) pageFlip.destroy();
-        if (window.innerWidth < 768) return;
+
+        const isMobile = window.innerWidth < 768;
 
         pageFlip = new St.PageFlip(flipbookEl, {
-          width: 500, height: 650,
+          width: isMobile ? 320 : 500,
+          height: isMobile ? 480 : 650,
           size: "stretch",
-          minWidth: 300, maxWidth: 1000,
+          minWidth: 280, maxWidth: 1000,
           minHeight: 400, maxHeight: 1200,
           showCover: true,
           mobileScrollSupport: true,
-          usePortrait: false,
+          usePortrait: isMobile,
           flippingTime: 600,
           drawShadow: true,
-          showPageCorners: true
+          showPageCorners: true,
+          disableCanvasShadow: false
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll(".page"));
@@ -1126,9 +1140,8 @@
         if (nextPageBtn) nextPageBtn.onclick = () => pageFlip.flipNext();
       }
 
-      const isMobile = window.innerWidth < 768;
-
-      if (!isMobile) {
+      // Inicializar en desktop por defecto
+      if (window.innerWidth >= 768) {
         initBook();
       }
 
