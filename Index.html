@@ -306,16 +306,37 @@
 
       /* In Fullscreen, let pages be big and readable */
       .book-container.fullscreen-mode .page {
-        font-size: 1rem !important;
-        padding: 1.5rem !important;
+        font-size: 0.85rem !important;
+        padding: 1rem !important;
         box-shadow: none !important;
         border: none !important;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .book-container.fullscreen-mode .page-header {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
       }
 
       .book-container.fullscreen-mode .page img {
         object-fit: contain !important;
-        max-height: 250px !important;
-        margin: 0.5rem 0 !important;
+        max-height: 140px !important;
+        margin: 0.25rem auto !important;
+        width: auto !important;
+      }
+
+      .book-container.fullscreen-mode .space-y-6>*+* {
+        margin-top: 0.75rem !important;
+      }
+
+      .book-container.fullscreen-mode .space-y-4>*+* {
+        margin-top: 0.5rem !important;
+      }
+
+      .book-container.fullscreen-mode #flipbook {
+        max-width: 100%;
+        max-height: 80vh;
       }
 
       body.modal-open .fixed-whatsapp {
@@ -1116,13 +1137,22 @@
         if (pageFlip) pageFlip.destroy();
 
         const isMobile = window.innerWidth < 768;
+        let width = 500;
+        let height = 650;
+
+        if (isMobile) {
+          // Usar el 90% del ancho de la ventana o 340px
+          width = Math.min(window.innerWidth * 0.9, 340);
+          // Altura proporcional para que no se corte arriba/abajo
+          height = Math.min(window.innerHeight * 0.75, 520);
+        }
 
         pageFlip = new St.PageFlip(flipbookEl, {
-          width: isMobile ? 320 : 500,
-          height: isMobile ? 480 : 650,
+          width: width,
+          height: height,
           size: "stretch",
-          minWidth: 280, maxWidth: 1000,
-          minHeight: 400, maxHeight: 1200,
+          minWidth: 260, maxWidth: 1000,
+          minHeight: 350, maxHeight: 1200,
           showCover: true,
           mobileScrollSupport: true,
           usePortrait: isMobile,
@@ -1144,6 +1174,17 @@
       if (window.innerWidth >= 768) {
         initBook();
       }
+
+      // Manejar cambios de orientación/redimensionado
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (document.body.classList.contains('modal-open') || window.innerWidth >= 768) {
+            initBook();
+          }
+        }, 300);
+      });
 
       // Hint Logic
       function hideHint() {
