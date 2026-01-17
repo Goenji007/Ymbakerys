@@ -92,13 +92,40 @@
       border-radius: 4px;
     }
 
+    /* ========== MODAL MENÚ REVISTA MEJORADO ========== */
     #mobile-menu-modal {
-      display: none;
+      display: flex;
       z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #mobile-menu-modal.active {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #mobile-menu-modal main {
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #mobile-menu-modal.active main {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Botón de cierre del libro flip en móvil */
+    #close-menu-btn {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #close-menu-btn.visible {
+      opacity: 1;
+      visibility: visible;
     }
 
     /* Flipbook Styles */
@@ -426,6 +453,89 @@
         transform: translateX(-100px) opacity(0);
       }
     }
+
+    /* ========== MENÚ MÓVIL MEJORADO ========== */
+    #mobile-menu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease-out,
+        transform 0.3s ease-out;
+      transform: translateY(-10px);
+    }
+
+    #mobile-menu.open {
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #mobile-menu a {
+      transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      display: block;
+    }
+
+    #mobile-menu a:hover,
+    #mobile-menu a:active {
+      background-color: rgba(220, 174, 174, 0.15);
+      transform: translateX(8px);
+    }
+
+    /* Overlay oscuro para menú móvil */
+    #mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 40;
+    }
+
+    #mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Animación del icono hamburguesa */
+    #mobile-menu-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    #mobile-menu-btn.active i {
+      transform: rotate(90deg);
+    }
+
+    /* ========== ADAPTACIONES RESPONSIVE AUTOMÁTICAS ========== */
+    @media (max-width: 767px) {
+
+      /* Optimizaciones táctiles para móvil */
+      .hover\:scale-105:hover {
+        transform: none;
+      }
+
+      /* Botones más grandes para touch */
+      #mobile-menu a,
+      #mobile-menu button {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 768px) {
+
+      /* Escritorio: efectos hover completos */
+      .group:hover .group-hover\:scale-110 {
+        transform: scale(1.1);
+      }
+    }
   </style>
 </head>
 
@@ -451,26 +561,33 @@
           <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
         </button>
       </div>
-      <button class="md:hidden text-2xl" id="mobile-menu-btn">
+      <button class="md:hidden text-2xl p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </button>
     </div>
     <div
-      class="hidden md:hidden absolute left-0 top-full w-full bg-surface-light dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 p-4 shadow-xl transition-all duration-300"
+      class="md:hidden absolute left-0 top-full w-full bg-surface-light dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 p-4 shadow-xl"
       id="mobile-menu">
-      <div class="flex flex-col space-y-4">
-        <a class="block hover:text-primary" href="#about">Nosotros</a>
-        <a class="block hover:text-primary" href="#products">Productos</a>
-        <a class="block hover:text-primary" href="#menu">Menú</a>
-        <a class="block hover:text-primary" href="#contact">Contacto</a>
-        <button class="flex items-center gap-2 text-left w-full" id="theme-toggle-mobile">
-          <span>Modo Oscuro</span>
+      <div class="flex flex-col space-y-2">
+        <a class="block text-gray-700 dark:text-gray-200 font-medium" href="#about">Nosotros</a>
+        <a class="block text-gray-700 dark:text-gray-200 font-medium" href="#products">Productos</a>
+        <a class="block text-gray-700 dark:text-gray-200 font-medium" href="#menu">Menú</a>
+        <a class="block text-gray-700 dark:text-gray-200 font-medium" href="#contact">Contacto</a>
+        <hr class="border-gray-200 dark:border-gray-700 my-2">
+        <button
+          class="flex items-center gap-3 text-left w-full text-gray-700 dark:text-gray-200 font-medium p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          id="theme-toggle-mobile">
           <i class="fas fa-moon dark:hidden"></i>
           <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+          <span>Modo Oscuro</span>
         </button>
       </div>
     </div>
   </nav>
+
+  <!-- Overlay para cerrar menú móvil al tocar fuera -->
+  <div id="mobile-overlay"></div>
 
   <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-pattern">
     <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
@@ -1094,39 +1211,99 @@
       themeToggleBtn?.addEventListener('click', toggleTheme);
       themeToggleBtnMobile?.addEventListener('click', toggleTheme);
 
-      mobileMenuBtn?.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+      // ========== MENÚ MÓVIL MEJORADO ==========
+      const mobileOverlay = document.getElementById('mobile-overlay');
+
+      function openMobileMenu() {
+        mobileMenu.classList.add('open');
+        mobileOverlay.classList.add('active');
+        mobileMenuBtn.classList.add('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
         const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        mobileOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+
+      // Toggle al hacer clic en el botón hamburguesa
+      mobileMenuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('open')) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
       });
 
-      // New Mobile Modal Logic
+      // Cerrar al hacer clic en el overlay
+      mobileOverlay?.addEventListener('click', closeMobileMenu);
+
+      // Cerrar al hacer clic en un enlace del menú
+      mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      });
+
+      // Cerrar con tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+          closeMobileMenu();
+        }
+      });
+
+      // ========== MENÚ REVISTA MÓVIL MEJORADO ==========
       const mobileTrigger = document.getElementById('open-menu-mobile');
       const mobileModal = document.getElementById('mobile-menu-modal');
       const closeModalMobile = document.getElementById('close-modal-mobile');
       const bookWrapper = document.getElementById('book-container-wrapper');
       const closeBtn = document.getElementById('close-menu-btn');
 
-      mobileTrigger?.addEventListener('click', () => {
-        // Abrir el menú revista en lugar del modal de lista
-        bookWrapper.classList.add('fullscreen-mode');
-        closeBtn.classList.remove('hidden');
-        document.body.classList.add('modal-open');
+      function openMenuModal() {
+        // En móvil usamos el modal de lista (más fluido)
+        mobileModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+      }
 
-        initBook();
+      function closeMenuModal() {
+        mobileModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // Abrir menú al tocar la portada
+      mobileTrigger?.addEventListener('click', openMenuModal);
+
+      // Cerrar con botón X
+      closeModalMobile?.addEventListener('click', closeMenuModal);
+
+      // Cerrar al tocar el fondo oscuro (fuera del modal)
+      mobileModal?.addEventListener('click', (e) => {
+        if (e.target === mobileModal) {
+          closeMenuModal();
+        }
       });
 
+      // Cerrar con tecla Escape (también para este modal)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileModal?.classList.contains('active')) {
+          closeMenuModal();
+        }
+      });
+
+      // Lógica del libro flip para ESCRITORIO solamente
       closeBtn?.addEventListener('click', () => {
         bookWrapper.classList.remove('fullscreen-mode');
-        closeBtn.classList.add('hidden');
+        closeBtn.classList.remove('visible');
         document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-      });
-
-      closeModalMobile?.addEventListener('click', () => {
-        mobileModal.classList.remove('active');
         document.body.style.overflow = '';
       });
 
