@@ -454,6 +454,504 @@
       }
     }
 
+    /* ========== ESTILOS DE REVISTA ELEGANTE ========== */
+
+    /* Textura de papel vintage */
+    .magazine-page {
+      background: linear-gradient(135deg, #fdfbf7 0%, #f9f5ed 50%, #fdfbf7 100%);
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      background-blend-mode: soft-light;
+      position: relative;
+    }
+
+    .dark .magazine-page {
+      background: linear-gradient(135deg, #2d2520 0%, #1f1a16 50%, #2d2520 100%);
+    }
+
+    /* Efecto de borde de página desgastado */
+    .magazine-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid rgba(139, 90, 43, 0.15);
+      box-shadow:
+        inset 0 0 30px rgba(139, 90, 43, 0.08),
+        inset 0 0 80px rgba(139, 90, 43, 0.04);
+      pointer-events: none;
+    }
+
+    /* Encabezados ornamentados estilo revista */
+    .magazine-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #5D2E2E;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .dark .magazine-header {
+      color: #DCAEAE;
+    }
+
+    .magazine-header::before,
+    .magazine-header::after {
+      content: '❧';
+      font-size: 1.2rem;
+      color: #DCAEAE;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .magazine-header::before {
+      left: 0;
+    }
+
+    .magazine-header::after {
+      right: 0;
+      transform: translateY(-50%) scaleX(-1);
+    }
+
+    /* Línea decorativa bajo encabezado */
+    .magazine-header-line {
+      display: block;
+      width: 60%;
+      height: 3px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, #DCAEAE, transparent);
+      position: relative;
+    }
+
+    .magazine-header-line::before {
+      content: '◆';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #fdfbf7;
+      padding: 0 0.5rem;
+      color: #DCAEAE;
+      font-size: 0.8rem;
+    }
+
+    .dark .magazine-header-line::before {
+      background: #2d2520;
+    }
+
+    /* Subtítulos estilo revista */
+    .magazine-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #8a7a6a;
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .dark .magazine-subtitle {
+      color: #c9b9a9;
+    }
+
+    /* Sección de categoría estilo revista */
+    .magazine-category {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #DCAEAE;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .magazine-category::before,
+    .magazine-category::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(220, 174, 174, 0.3), rgba(220, 174, 174, 0.8), rgba(220, 174, 174, 0.3));
+    }
+
+    /* Items de menú estilo revista */
+    .magazine-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px dotted rgba(139, 90, 43, 0.2);
+      position: relative;
+    }
+
+    .magazine-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: repeating-linear-gradient(90deg,
+          transparent,
+          transparent 2px,
+          rgba(139, 90, 43, 0.15) 2px,
+          rgba(139, 90, 43, 0.15) 4px);
+    }
+
+    .magazine-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #4a3b3b;
+      flex: 1;
+    }
+
+    .dark .magazine-item-name {
+      color: #e8d8d8;
+    }
+
+    .magazine-item-desc {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #8a7a6a;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .dark .magazine-item-desc {
+      color: #a8968a;
+    }
+
+    .magazine-item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(139, 90, 43, 0.4);
+      margin: 0 0.75rem;
+      min-width: 30px;
+    }
+
+    .magazine-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #b07c7c;
+      white-space: nowrap;
+    }
+
+    /* Imágenes estilo revista con marco decorativo */
+    .magazine-image-frame {
+      position: relative;
+      margin: 1.5rem auto;
+      padding: 0.5rem;
+      background: linear-gradient(135deg, #f5efe6 0%, #ebe3d8 100%);
+      box-shadow:
+        0 4px 20px rgba(139, 90, 43, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+    }
+
+    .dark .magazine-image-frame {
+      background: linear-gradient(135deg, #3d3530 0%, #2d2520 100%);
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .magazine-image-frame::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(139, 90, 43, 0.2);
+      pointer-events: none;
+    }
+
+    .magazine-image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    /* Caption de imagen estilo revista */
+    .magazine-image-caption {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      font-style: italic;
+      text-align: center;
+      color: #8a7a6a;
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .dark .magazine-image-caption {
+      color: #a8968a;
+    }
+
+    /* Número de página estilo revista */
+    .magazine-page-number {
+      position: absolute;
+      bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #b07c7c;
+    }
+
+    .magazine-page-number.left {
+      left: 1.5rem;
+    }
+
+    .magazine-page-number.right {
+      right: 1.5rem;
+    }
+
+    .magazine-page-number::before {
+      content: '— ';
+    }
+
+    .magazine-page-number::after {
+      content: ' —';
+    }
+
+    /* Cita destacada estilo revista */
+    .magazine-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      text-align: center;
+      color: #5D2E2E;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      position: relative;
+      background: linear-gradient(135deg, rgba(220, 174, 174, 0.1) 0%, rgba(220, 174, 174, 0.05) 100%);
+      border-radius: 8px;
+    }
+
+    .dark .magazine-quote {
+      color: #DCAEAE;
+      background: linear-gradient(135deg, rgba(220, 174, 174, 0.15) 0%, rgba(220, 174, 174, 0.05) 100%);
+    }
+
+    .magazine-quote::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: #DCAEAE;
+      position: absolute;
+      top: 0;
+      left: 1rem;
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    .magazine-quote::after {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: #DCAEAE;
+      position: absolute;
+      bottom: -0.5rem;
+      right: 1rem;
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    /* Separador decorativo */
+    .magazine-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.5rem 0;
+      color: #DCAEAE;
+      font-size: 1.2rem;
+      letter-spacing: 0.5rem;
+    }
+
+    .magazine-divider::before,
+    .magazine-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(220, 174, 174, 0.5), transparent);
+    }
+
+    /* Capitular estilo revista */
+    .magazine-dropcap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-right: 0.5rem;
+      margin-top: 0.1rem;
+      color: #DCAEAE;
+      text-shadow: 2px 2px 4px rgba(139, 90, 43, 0.1);
+    }
+
+    /* Portada de revista mejorada */
+    .magazine-cover {
+      background: linear-gradient(165deg, #c48b8b 0%, #9a5656 50%, #7d4646 100%) !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .magazine-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    .magazine-cover::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+    }
+
+    .magazine-cover-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .magazine-cover-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .magazine-cover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .magazine-cover-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+    }
+
+    .magazine-cover-edition {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+    }
+
+    /* Contraportada elegante */
+    .magazine-back-cover {
+      background: linear-gradient(165deg, #7d4646 0%, #5d3232 50%, #4a2626 100%) !important;
+    }
+
+    .magazine-back-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    /* Grid de imágenes estilo revista */
+    .magazine-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .magazine-image-grid img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(139, 90, 43, 0.15);
+    }
+
+    /* Texto destacado */
+    .magazine-highlight {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #b07c7c;
+    }
+
+    /* Badge de precio especial */
+    .magazine-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #DCAEAE 0%, #c48b8b 100%);
+      color: white;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      margin-left: 0.5rem;
+    }
+
+    /* Lomo del libro mejorado */
+    .flip-book::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(90deg,
+          rgba(0, 0, 0, 0.3) 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          rgba(0, 0, 0, 0.3) 100%);
+      z-index: 10;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
     /* ========== MENÚ MÓVIL MEJORADO ========== */
     #mobile-menu {
       max-height: 0;
@@ -869,148 +1367,228 @@
         </button>
 
         <div id="flipbook" class="flip-book shadow-2xl">
-          <!-- Cover -->
-          <div class="page page-cover" data-density="hard">
-            <div class="page-content">
-              <img src="assets/img/logo.png" alt="Logo">
-              <h2 class="font-display">Menú Dulce</h2>
-              <p>YM Bakery's</p>
-              <div class="mt-8 text-sm opacity-80">Cotuí, RD</div>
+          <!-- Portada de Revista -->
+          <div class="page magazine-cover" data-density="hard">
+            <div class="magazine-cover-content">
+              <img src="assets/img/logo.png" alt="Logo YM Bakery's" class="magazine-cover-logo">
+              <h2 class="magazine-cover-title">Menú Dulce</h2>
+              <p class="magazine-cover-subtitle">YM Bakery's</p>
+              <div class="magazine-cover-edition">Edición 2025 • Cotuí, RD</div>
             </div>
           </div>
 
-          <!-- Page 1: Flanes -->
-          <div class="page">
+          <!-- Página 1: Flanes -->
+          <div class="page magazine-page">
             <div class="page-content">
-              <div class="page-header">Flanes</div>
-              <ul class="space-y-6">
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <div class="flex flex-col text-left">
-                    <span class="font-bold">Tradicional Porción</span>
-                    <span class="text-xs text-gray-500">Receta de la abuela</span>
-                  </div>
-                  <span class="font-bold text-primary">$125.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span class="font-bold">Tradicional Completo</span>
-                  <span class="font-bold text-primary">$1,500.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span class="font-bold">Chocolate Porción</span>
-                  <span class="font-bold text-primary">$150.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span class="font-bold">Chocolate Completo</span>
-                  <span class="font-bold text-primary">$1,850.00</span>
-                </li>
-              </ul>
-              <div class="grid grid-cols-2 gap-2 mt-4">
-                <img src="assets/img/flan-strawberry.jpg" alt="Flan"
-                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
-                <img src="assets/img/flan-containers.jpg" alt="Flanes"
-                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
+              <h2 class="magazine-header">
+                Flanes
+                <span class="magazine-header-line"></span>
+              </h2>
+              <p class="magazine-subtitle">La tradición hecha postre</p>
+
+              <div class="magazine-quote">
+                Cremosos y tradicionales, nuestra receta familiar que ha endulzado generaciones
               </div>
-              <div class="page-footer"></div>
-            </div>
-          </div>
 
-          <!-- Page 2: Chocoflan & Brownies -->
-          <div class="page">
-            <div class="page-content">
-              <div class="page-header">Chocoflan & Brownies</div>
-              <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan"
-                class="w-full h-32 object-contain rounded-lg mb-4 shadow-sm bg-white">
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 text-left">Chocoflan</h4>
-              <ul class="space-y-4 mb-8">
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span>Porción</span>
-                  <span class="font-bold text-primary">$200.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span>Completo</span>
-                  <span class="font-bold text-primary">$2,500.00</span>
-                </li>
-              </ul>
-              <img src="assets/img/brownie-oreo.jpg" alt="Brownies"
-                class="w-full h-24 object-contain rounded-lg mb-2 shadow-sm bg-white">
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-4 text-left">Brownies</h4>
-              <ul class="space-y-4">
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span>Brownie de Oreo</span>
-                  <span class="font-bold text-primary">$80.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-2">
-                  <span>Red Velvet</span>
-                  <span class="font-bold text-primary">$90.00</span>
-                </li>
-              </ul>
-              <div class="page-footer"></div>
-            </div>
-          </div>
-
-          <!-- Page 3: Tres Leches & Galletas -->
-          <div class="page">
-            <div class="page-content">
-              <div class="page-header">Tres Leches & Galletas</div>
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 text-left">Tres Leches</h4>
-              <img src="assets/img/chocoflan-cherry.jpg" alt="Tres Leches"
-                class="w-full h-24 object-contain rounded-lg mb-4 shadow-sm bg-white">
-              <ul class="space-y-4 mb-6">
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Tradicional</span>
-                  <span class="font-bold text-primary">$150.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Chocolate</span>
-                  <span class="font-bold text-primary">$180.00</span>
-                </li>
-              </ul>
-              <h4 class="font-bold text-sm uppercase tracking-wider text-gray-400 mb-2 text-left">Galletas</h4>
-              <ul class="space-y-3">
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Rellena de Dulce de leche</span>
-                  <span class="font-bold text-primary">$60.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Chispas de Chocolate</span>
-                  <span class="font-bold text-primary">$60.00</span>
-                </li>
-                <li
-                  class="flex justify-between items-center border-b border-dashed border-gray-300 dark:border-gray-600 pb-1">
-                  <span>Galletas de Mantequilla</span>
-                  <span class="font-bold text-primary">$50.00</span>
-                </li>
-              </ul>
-              <div class="grid grid-cols-2 gap-2 mt-2">
-                <img src="assets/img/cookies-powder.jpg" alt="Polvorones"
-                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
-                <img src="assets/img/alfajores-bag.jpg" alt="Alfajores"
-                  class="w-full h-24 object-contain rounded-lg shadow-sm bg-white">
+              <div class="magazine-category">Tradicional</div>
+              <div class="magazine-item">
+                <div>
+                  <span class="magazine-item-name">Porción Individual</span>
+                  <span class="magazine-item-desc">Receta de la abuela</span>
+                </div>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$125.00</span>
               </div>
-              <div class="page-footer"></div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Tamaño Familiar</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$1,500.00</span>
+              </div>
+
+              <div class="magazine-divider">✦</div>
+
+              <div class="magazine-category">Chocolate</div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Porción Individual</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$150.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Tamaño Familiar</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$1,850.00</span>
+              </div>
+
+              <div class="magazine-image-grid mt-4">
+                <div class="magazine-image-frame">
+                  <img src="assets/img/flan-strawberry.jpg" alt="Flan con fresas">
+                </div>
+                <div class="magazine-image-frame">
+                  <img src="assets/img/flan-containers.jpg" alt="Flanes variados">
+                </div>
+              </div>
+
+              <span class="magazine-page-number left">1</span>
             </div>
           </div>
 
-          <!-- Back Cover -->
-          <div class="page page-cover" data-density="hard">
+          <!-- Página 2: Chocoflan -->
+          <div class="page magazine-page">
             <div class="page-content">
-              <h3 class="font-display text-2xl mb-4">¡Gracias por elegirnos!</h3>
-              <p class="text-sm">Cada pedido es preparado con ingredientes frescos y mucho amor.</p>
-              <div class="mt-12 flex flex-col gap-4">
-                <span class="text-xs uppercase tracking-widest">Contáctanos</span>
-                <span class="font-bold">829-835-2169</span>
+              <h2 class="magazine-header">
+                Chocoflan
+                <span class="magazine-header-line"></span>
+              </h2>
+              <p class="magazine-subtitle">El imposible hecho realidad</p>
+
+              <div class="magazine-image-frame" style="max-width: 280px;">
+                <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan Oreo" style="height: 140px; object-fit: cover;">
+                <p class="magazine-image-caption">Nuestra especialidad de la casa</p>
+              </div>
+
+              <div class="magazine-quote">
+                La combinación perfecta de bizcocho de chocolate y flan cremoso
+              </div>
+
+              <div class="magazine-category">Opciones</div>
+              <div class="magazine-item">
+                <div>
+                  <span class="magazine-item-name">Porción Gourmet</span>
+                  <span class="magazine-item-desc">Presentación individual elegante</span>
+                </div>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$200.00</span>
+              </div>
+              <div class="magazine-item">
+                <div>
+                  <span class="magazine-item-name">Tamaño Completo</span>
+                  <span class="magazine-item-desc">Ideal para 10-12 personas</span>
+                </div>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$2,500.00</span>
+              </div>
+
+              <span class="magazine-page-number right">2</span>
+            </div>
+          </div>
+
+          <!-- Página 3: Brownies -->
+          <div class="page magazine-page">
+            <div class="page-content">
+              <h2 class="magazine-header">
+                Brownies
+                <span class="magazine-header-line"></span>
+              </h2>
+              <p class="magazine-subtitle">Tentación chocolatosa</p>
+
+              <div class="magazine-image-frame" style="max-width: 250px;">
+                <img src="assets/img/brownie-oreo.jpg" alt="Brownie Oreo" style="height: 120px; object-fit: cover;">
+                <p class="magazine-image-caption">Melcochos y deliciosos</p>
+              </div>
+
+              <div class="magazine-category">Sabores</div>
+              <div class="magazine-item">
+                <div>
+                  <span class="magazine-item-name">Brownie de Oreo</span>
+                  <span class="magazine-badge">Popular</span>
+                </div>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$80.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Red Velvet</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$90.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Chocolate Tradicional</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$70.00</span>
+              </div>
+
+              <div class="magazine-quote">
+                La dosis perfecta de chocolate para satisfacer cualquier antojo
+              </div>
+
+              <span class="magazine-page-number left">3</span>
+            </div>
+          </div>
+
+          <!-- Página 4: Tres Leches & Galletas -->
+          <div class="page magazine-page">
+            <div class="page-content">
+              <h2 class="magazine-header">
+                Más Delicias
+                <span class="magazine-header-line"></span>
+              </h2>
+              <p class="magazine-subtitle">Postres que enamoran</p>
+
+              <div class="magazine-category">Tres Leches</div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Tradicional</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$150.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Chocolate</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$180.00</span>
+              </div>
+
+              <div class="magazine-divider">❧</div>
+
+              <div class="magazine-category">Galletas Artesanales</div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Rellena de Dulce de Leche</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$60.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Chispas de Chocolate</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$60.00</span>
+              </div>
+              <div class="magazine-item">
+                <span class="magazine-item-name">Mantequilla Clásica</span>
+                <span class="magazine-item-dots"></span>
+                <span class="magazine-item-price">$50.00</span>
+              </div>
+
+              <div class="magazine-image-grid">
+                <div class="magazine-image-frame">
+                  <img src="assets/img/cookies-powder.jpg" alt="Polvorones">
+                </div>
+                <div class="magazine-image-frame">
+                  <img src="assets/img/alfajores-bag.jpg" alt="Alfajores">
+                </div>
+              </div>
+
+              <span class="magazine-page-number right">4</span>
+            </div>
+          </div>
+
+          <!-- Contraportada -->
+          <div class="page magazine-cover magazine-back-cover" data-density="hard">
+            <div class="magazine-cover-content">
+              <i class="fas fa-heart text-4xl text-white/50 mb-6"></i>
+              <h3 class="magazine-cover-title" style="font-size: 1.8rem;">¡Gracias!</h3>
+              <p class="magazine-cover-subtitle">Por elegirnos para endulzar tus momentos</p>
+
+              <div class="magazine-divider" style="margin: 2rem 0; color: rgba(255,255,255,0.3);">✦ ✦ ✦</div>
+
+              <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Cada pedido es preparado con ingredientes frescos y mucho amor
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
+                <span
+                  style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.6);">Contáctanos</span>
+                <span style="font-size: 1.5rem; font-weight: bold; color: white;">
+                  <i class="fab fa-whatsapp mr-2"></i>829-835-2169
+                </span>
+                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">
+                  <i class="fab fa-instagram mr-1"></i>@ym_bakerys
+                </span>
               </div>
             </div>
           </div>
