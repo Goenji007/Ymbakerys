@@ -18,14 +18,14 @@
       theme: {
         extend: {
           colors: {
-            primary: "#DCAEAE", // Rose/Terracotta from image
-            secondary: "#D4AF37", // Gold accent
-            "background-light": "#FFF9F5", // Warm delicate cream
-            "background-dark": "#2C1818", // Deep reddish brown for dark mode
+            primary: "#DCAEAE",
+            secondary: "#D4AF37",
+            "background-light": "#FFF9F5",
+            "background-dark": "#2C1818",
             "surface-light": "#FFFFFF",
-            "surface-dark": "#3D2222", // Lighter reddish brown surface
-            "text-light": "#5D2E2E", // Dark reddish brown text
-            "text-dark": "#F5E6E6", // Light rose-white text
+            "surface-dark": "#3D2222",
+            "text-light": "#5D2E2E",
+            "text-dark": "#F5E6E6",
             'bakery-cream': '#fdf5e6',
             'bakery-rose': '#b07c7c',
             'bakery-rose-dark': '#966363',
@@ -35,11 +35,6 @@
           fontFamily: {
             display: ["'Playfair Display'", "serif"],
             body: ["'Lato'", "sans-serif"],
-            'serif': ['"Playfair Display"', 'serif'],
-            'sans': ['"Lato"', 'sans-serif'],
-          },
-          backgroundImage: {
-            'parchment': 'url("https://www.transparenttextures.com/patterns/aged-paper.png")',
           },
           borderRadius: {
             DEFAULT: "0.75rem",
@@ -47,7 +42,6 @@
         },
       },
     };
-
   </script>
   <style>
     ::-webkit-scrollbar {
@@ -59,7 +53,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #E67E22;
+      background: #DCAEAE;
       border-radius: 5px
     }
 
@@ -73,894 +67,7 @@
       background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
     }
 
-    /* New Bakery Modal Styles */
-    .backdrop-blur-custom {
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #b07c7c;
-      border-radius: 4px;
-    }
-
-    /* ========== MODAL MENÚ REVISTA MEJORADO ========== */
-    #mobile-menu-modal {
-      display: flex;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    #mobile-menu-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    #mobile-menu-modal main {
-      transform: translateY(30px) scale(0.95);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    #mobile-menu-modal.active main {
-      transform: translateY(0) scale(1);
-    }
-
-    /* Botón de cierre del libro flip en móvil */
-    #close-menu-btn {
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    #close-menu-btn.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Flipbook Styles */
-    .book-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
-      padding: 2rem 0;
-    }
-
-    .flip-book {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      display: none;
-      /* Hidden until initialized */
-      background: white;
-    }
-
-    .page {
-      padding: 2rem;
-      background-color: #fdfdfd;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.1);
-    }
-
-    .dark .page {
-      background-color: #292524;
-      border-color: #444;
-      box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Spine effect for internal pages */
-    .page:nth-child(even) {
-      box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.1);
-      border-left: none;
-    }
-
-    .page:nth-child(odd) {
-      box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.1);
-      border-right: none;
-    }
-
-    .dark .page:nth-child(even) {
-      box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.5);
-    }
-
-    .dark .page:nth-child(odd) {
-      box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.5);
-    }
-
-    .page-content {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow-y: auto;
-      /* Fallback for small screens */
-      scrollbar-width: none;
-      /* Hide scrollbar Firefox */
-    }
-
-    .page-content::-webkit-scrollbar {
-      display: none;
-      /* Hide scrollbar Chrome/Safari */
-    }
-
-    /* Lighting overlay for the spine */
-    .page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 40px;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .page:nth-child(even)::before {
-      left: 0;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .page:nth-child(odd)::before {
-      right: 0;
-      background: linear-gradient(to left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .dark .page:nth-child(even)::before {
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .dark .page:nth-child(odd)::before {
-      background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .page-header {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #DCAEAE;
-      border-bottom: 2px solid #DCAEAE;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .page-footer {
-      position: absolute;
-      bottom: 1rem;
-      width: calc(100% - 4rem);
-      text-align: center;
-      font-size: 0.8rem;
-      color: #999;
-    }
-
-    .stf__parent {
-      background-color: transparent !important;
-    }
-
-    .page-cover {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: linear-gradient(135deg, #DCAEAE, #8a4a45) !important;
-      color: white;
-      box-shadow: none !important;
-      border: none !important;
-    }
-
-    .page-cover::before {
-      display: none !important;
-    }
-
-    .page-cover img {
-      width: 150px;
-      height: 150px;
-      margin-bottom: 2rem;
-      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-    }
-
-    .page-cover h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Spine Binding */
-    .flip-book::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(0, 0, 0, 0.2);
-      z-index: 10;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    .dark .flip-book::after {
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    @media (max-width: 768px) {
-      .book-container {
-        padding: 0.5rem 0;
-      }
-
-      /* Hide spine on mobile */
-      .flip-book::after {
-        display: none !important;
-      }
-
-      /* Mobile Trigger Button Styles */
-      .mobile-menu-trigger {
-        display: none;
-      }
-    }
-
-    /* FULLSCREEN MODE STYLES (Global) */
-    .book-container.fullscreen-mode {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #1a1a1a;
-      z-index: 10000;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 1rem;
-    }
-
-    .book-container.fullscreen-mode #flipbook {
-      margin: auto 0 !important;
-      max-width: 100%;
-      max-height: 80vh;
-    }
-
-    .book-container.fullscreen-mode #nav-buttons-container {
-      position: absolute;
-      bottom: 5vh;
-      left: 0;
-      right: 0;
-      z-index: 10002;
-      margin: 0 !important;
-      pointer-events: none;
-      /* Let clicks pass through container */
-    }
-
-    .book-container.fullscreen-mode #nav-buttons-container button {
-      pointer-events: auto;
-      /* Re-enable pointer events for buttons */
-    }
-
-    .book-container.fullscreen-mode .mt-12 {
-      display: none !important;
-    }
-
-    .book-container.fullscreen-mode .page {
-      font-size: 0.85rem !important;
-      padding: 1rem !important;
-      box-shadow: none !important;
-      border: none !important;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .book-container.fullscreen-mode .page-header {
-      font-size: 1.25rem !important;
-      margin-bottom: 1rem !important;
-    }
-
-    .book-container.fullscreen-mode .page img {
-      object-fit: contain !important;
-      max-height: 140px !important;
-      margin: 0.25rem auto !important;
-      width: auto !important;
-    }
-
-    .book-container.fullscreen-mode .space-y-6>*+* {
-      margin-top: 0.75rem !important;
-    }
-
-    .book-container.fullscreen-mode .space-y-4>*+* {
-      margin-top: 0.5rem !important;
-    }
-
-
-    body.modal-open .fixed-whatsapp {
-      display: none !important;
-    }
-
-    /* Default Mobile rules for pages (when not fullscreen) */
-    .page .text-xs {
-      font-size: 0.65rem !important;
-    }
-
-    .page img {
-      object-fit: contain !important;
-      max-height: 200px;
-      background-color: white;
-    }
-
-    .dark .page {
-      border-color: #444;
-    }
-
-    .page::before,
-    .page:nth-child(even)::before,
-    .page:nth-child(odd)::before {
-      display: none !important;
-    }
-
-    /* Cover Trigger for Mobile */
-    .mobile-cover-trigger {
-      cursor: pointer;
-      max-width: 320px;
-      margin: 0 auto;
-      transition: transform 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .mobile-cover-trigger:hover {
-      transform: scale(1.02);
-    }
-
-
-    /* Interactivity Cues */
-    .corner-hint {
-      position: relative;
-    }
-
-    .corner-hint::after {
-      display: none;
-      /* hide orange hint */
-    }
-
-    @keyframes wiggle {
-
-      0%,
-      100% {
-        transform: rotate(0deg) scale(1);
-      }
-
-      50% {
-        transform: rotate(-5deg) scale(1.1);
-      }
-    }
-
-
-
-    .hint-icon {
-      font-size: 3rem;
-      animation: swipe 2s infinite ease-in-out;
-    }
-
-    @keyframes swipe {
-      0% {
-        transform: translateX(50px) opacity(0);
-      }
-
-      50% {
-        transform: translateX(-50px) opacity(1);
-      }
-
-      100% {
-        transform: translateX(-100px) opacity(0);
-      }
-    }
-
-    /* ========== ESTILOS DE REVISTA ELEGANTE ========== */
-
-    /* Textura de papel vintage */
-    .magazine-page {
-      background: linear-gradient(135deg, #fdfbf7 0%, #f9f5ed 50%, #fdfbf7 100%);
-      background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      background-blend-mode: soft-light;
-      position: relative;
-    }
-
-    .dark .magazine-page {
-      background: linear-gradient(135deg, #2d2520 0%, #1f1a16 50%, #2d2520 100%);
-    }
-
-    /* Efecto de borde de página desgastado */
-    .magazine-page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 1px solid rgba(139, 90, 43, 0.15);
-      box-shadow:
-        inset 0 0 30px rgba(139, 90, 43, 0.08),
-        inset 0 0 80px rgba(139, 90, 43, 0.04);
-      pointer-events: none;
-    }
-
-    /* Encabezados ornamentados estilo revista */
-    .magazine-header {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #5D2E2E;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 1.5rem;
-    }
-
-    .dark .magazine-header {
-      color: #DCAEAE;
-    }
-
-    .magazine-header::before,
-    .magazine-header::after {
-      content: '❧';
-      font-size: 1.2rem;
-      color: #DCAEAE;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .magazine-header::before {
-      left: 0;
-    }
-
-    .magazine-header::after {
-      right: 0;
-      transform: translateY(-50%) scaleX(-1);
-    }
-
-    /* Línea decorativa bajo encabezado */
-    .magazine-header-line {
-      display: block;
-      width: 60%;
-      height: 3px;
-      margin: 0 auto;
-      background: linear-gradient(90deg, transparent, #DCAEAE, transparent);
-      position: relative;
-    }
-
-    .magazine-header-line::before {
-      content: '◆';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: #fdfbf7;
-      padding: 0 0.5rem;
-      color: #DCAEAE;
-      font-size: 0.8rem;
-    }
-
-    .dark .magazine-header-line::before {
-      background: #2d2520;
-    }
-
-    /* Subtítulos estilo revista */
-    .magazine-subtitle {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-style: italic;
-      color: #8a7a6a;
-      text-align: center;
-      margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-    }
-
-    .dark .magazine-subtitle {
-      color: #c9b9a9;
-    }
-
-    /* Sección de categoría estilo revista */
-    .magazine-category {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      color: #DCAEAE;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .magazine-category::before,
-    .magazine-category::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(220, 174, 174, 0.3), rgba(220, 174, 174, 0.8), rgba(220, 174, 174, 0.3));
-    }
-
-    /* Items de menú estilo revista */
-    .magazine-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0.75rem 0;
-      border-bottom: 1px dotted rgba(139, 90, 43, 0.2);
-      position: relative;
-    }
-
-    .magazine-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: repeating-linear-gradient(90deg,
-          transparent,
-          transparent 2px,
-          rgba(139, 90, 43, 0.15) 2px,
-          rgba(139, 90, 43, 0.15) 4px);
-    }
-
-    .magazine-item-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #4a3b3b;
-      flex: 1;
-    }
-
-    .dark .magazine-item-name {
-      color: #e8d8d8;
-    }
-
-    .magazine-item-desc {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.75rem;
-      font-style: italic;
-      color: #8a7a6a;
-      display: block;
-      margin-top: 0.25rem;
-    }
-
-    .dark .magazine-item-desc {
-      color: #a8968a;
-    }
-
-    .magazine-item-dots {
-      flex: 1;
-      border-bottom: 1px dotted rgba(139, 90, 43, 0.4);
-      margin: 0 0.75rem;
-      min-width: 30px;
-    }
-
-    .magazine-item-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #b07c7c;
-      white-space: nowrap;
-    }
-
-    /* Imágenes estilo revista con marco decorativo */
-    .magazine-image-frame {
-      position: relative;
-      margin: 1.5rem auto;
-      padding: 0.5rem;
-      background: linear-gradient(135deg, #f5efe6 0%, #ebe3d8 100%);
-      box-shadow:
-        0 4px 20px rgba(139, 90, 43, 0.15),
-        inset 0 0 20px rgba(255, 255, 255, 0.5);
-      border-radius: 4px;
-    }
-
-    .dark .magazine-image-frame {
-      background: linear-gradient(135deg, #3d3530 0%, #2d2520 100%);
-      box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.05);
-    }
-
-    .magazine-image-frame::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(139, 90, 43, 0.2);
-      pointer-events: none;
-    }
-
-    .magazine-image-frame img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 2px;
-    }
-
-    /* Caption de imagen estilo revista */
-    .magazine-image-caption {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.7rem;
-      font-style: italic;
-      text-align: center;
-      color: #8a7a6a;
-      margin-top: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .dark .magazine-image-caption {
-      color: #a8968a;
-    }
-
-    /* Número de página estilo revista */
-    .magazine-page-number {
-      position: absolute;
-      bottom: 1rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
-      font-style: italic;
-      color: #b07c7c;
-    }
-
-    .magazine-page-number.left {
-      left: 1.5rem;
-    }
-
-    .magazine-page-number.right {
-      right: 1.5rem;
-    }
-
-    .magazine-page-number::before {
-      content: '— ';
-    }
-
-    .magazine-page-number::after {
-      content: ' —';
-    }
-
-    /* Cita destacada estilo revista */
-    .magazine-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      text-align: center;
-      color: #5D2E2E;
-      padding: 1.5rem 2rem;
-      margin: 1.5rem 0;
-      position: relative;
-      background: linear-gradient(135deg, rgba(220, 174, 174, 0.1) 0%, rgba(220, 174, 174, 0.05) 100%);
-      border-radius: 8px;
-    }
-
-    .dark .magazine-quote {
-      color: #DCAEAE;
-      background: linear-gradient(135deg, rgba(220, 174, 174, 0.15) 0%, rgba(220, 174, 174, 0.05) 100%);
-    }
-
-    .magazine-quote::before {
-      content: '"';
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: #DCAEAE;
-      position: absolute;
-      top: 0;
-      left: 1rem;
-      line-height: 1;
-      opacity: 0.5;
-    }
-
-    .magazine-quote::after {
-      content: '"';
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: #DCAEAE;
-      position: absolute;
-      bottom: -0.5rem;
-      right: 1rem;
-      line-height: 1;
-      opacity: 0.5;
-    }
-
-    /* Separador decorativo */
-    .magazine-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 1.5rem 0;
-      color: #DCAEAE;
-      font-size: 1.2rem;
-      letter-spacing: 0.5rem;
-    }
-
-    .magazine-divider::before,
-    .magazine-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(220, 174, 174, 0.5), transparent);
-    }
-
-    /* Capitular estilo revista */
-    .magazine-dropcap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      line-height: 1;
-      margin-right: 0.5rem;
-      margin-top: 0.1rem;
-      color: #DCAEAE;
-      text-shadow: 2px 2px 4px rgba(139, 90, 43, 0.1);
-    }
-
-    /* Portada de revista mejorada */
-    .magazine-cover {
-      background: linear-gradient(165deg, #c48b8b 0%, #9a5656 50%, #7d4646 100%) !important;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .magazine-cover::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.3;
-    }
-
-    .magazine-cover::after {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      pointer-events: none;
-    }
-
-    .magazine-cover-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .magazine-cover-logo {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 2rem;
-      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .magazine-cover-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .magazine-cover-subtitle {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 2rem;
-    }
-
-    .magazine-cover-edition {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      color: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.5rem 1.5rem;
-      border-radius: 20px;
-    }
-
-    /* Contraportada elegante */
-    .magazine-back-cover {
-      background: linear-gradient(165deg, #7d4646 0%, #5d3232 50%, #4a2626 100%) !important;
-    }
-
-    .magazine-back-cover::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.3;
-    }
-
-    /* Grid de imágenes estilo revista */
-    .magazine-image-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin: 1rem 0;
-    }
-
-    .magazine-image-grid img {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(139, 90, 43, 0.15);
-    }
-
-    /* Texto destacado */
-    .magazine-highlight {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      color: #b07c7c;
-    }
-
-    /* Badge de precio especial */
-    .magazine-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #DCAEAE 0%, #c48b8b 100%);
-      color: white;
-      font-family: 'Lato', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.5rem;
-      border-radius: 2px;
-      margin-left: 0.5rem;
-    }
-
-    /* Lomo del libro mejorado */
-    .flip-book::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 6px;
-      background: linear-gradient(90deg,
-          rgba(0, 0, 0, 0.3) 0%,
-          rgba(255, 255, 255, 0.1) 50%,
-          rgba(0, 0, 0, 0.3) 100%);
-      z-index: 10;
-      transform: translateX(-50%);
-      pointer-events: none;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    /* ========== MENÚ MÓVIL MEJORADO ========== */
+    /* ========== MENÚ MÓVIL ========== */
     #mobile-menu {
       max-height: 0;
       opacity: 0;
@@ -990,7 +97,6 @@
       transform: translateX(8px);
     }
 
-    /* Overlay oscuro para menú móvil */
     #mobile-overlay {
       position: fixed;
       top: 0;
@@ -1009,7 +115,6 @@
       visibility: visible;
     }
 
-    /* Animación del icono hamburguesa */
     #mobile-menu-btn i {
       transition: transform 0.3s ease;
     }
@@ -1018,28 +123,243 @@
       transform: rotate(90deg);
     }
 
-    /* ========== ADAPTACIONES RESPONSIVE AUTOMÁTICAS ========== */
-    @media (max-width: 767px) {
+    /* ========== NUEVO MENÚ DULCE - TARJETAS ELEGANTES ========== */
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
 
-      /* Optimizaciones táctiles para móvil */
-      .hover\:scale-105:hover {
-        transform: none;
+    .menu-tab {
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      background: rgba(220, 174, 174, 0.1);
+      color: #5D2E2E;
+    }
+
+    .dark .menu-tab {
+      background: rgba(220, 174, 174, 0.15);
+      color: #F5E6E6;
+    }
+
+    .menu-tab:hover {
+      background: rgba(220, 174, 174, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .menu-tab.active {
+      background: linear-gradient(135deg, #DCAEAE 0%, #c48b8b 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(220, 174, 174, 0.4);
+    }
+
+    .menu-category {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .menu-category.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
 
-      /* Botones más grandes para touch */
-      #mobile-menu a,
-      #mobile-menu button {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    @media (min-width: 768px) {
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
 
-      /* Escritorio: efectos hover completos */
-      .group:hover .group-hover\:scale-110 {
-        transform: scale(1.1);
+    .menu-card {
+      background: linear-gradient(145deg, #ffffff 0%, #fdf5f5 100%);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(139, 90, 90, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(220, 174, 174, 0.2);
+    }
+
+    .dark .menu-card {
+      background: linear-gradient(145deg, #3D2222 0%, #2C1818 100%);
+      border-color: rgba(220, 174, 174, 0.1);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(139, 90, 90, 0.2);
+    }
+
+    .menu-card-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .menu-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover .menu-card-image img {
+      transform: scale(1.08);
+    }
+
+    .menu-card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #DCAEAE 0%, #c48b8b 100%);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .menu-card-content {
+      padding: 1.5rem;
+    }
+
+    .menu-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #4a3b3b;
+      margin-bottom: 0.5rem;
+    }
+
+    .dark .menu-card-title {
+      color: #F5E6E6;
+    }
+
+    .menu-card-description {
+      font-size: 0.9rem;
+      color: #7a6a6a;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .dark .menu-card-description {
+      color: #c9b9b9;
+    }
+
+    .menu-card-prices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .menu-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px dotted rgba(139, 90, 90, 0.2);
+    }
+
+    .menu-price-row:last-child {
+      border-bottom: none;
+    }
+
+    .menu-price-label {
+      font-size: 0.85rem;
+      color: #5D2E2E;
+    }
+
+    .dark .menu-price-label {
+      color: #d8c8c8;
+    }
+
+    .menu-price-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #b07c7c;
+    }
+
+    .category-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .category-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #5D2E2E;
+      margin-bottom: 0.5rem;
+    }
+
+    .dark .category-header h3 {
+      color: #DCAEAE;
+    }
+
+    .category-header p {
+      font-style: italic;
+      color: #8a7a7a;
+      font-size: 1rem;
+    }
+
+    .dark .category-header p {
+      color: #b9a9a9;
+    }
+
+    .category-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 0.75rem 0;
+    }
+
+    .category-divider::before,
+    .category-divider::after {
+      content: '';
+      height: 2px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, #DCAEAE, transparent);
+    }
+
+    .category-divider span {
+      color: #DCAEAE;
+      font-size: 1.25rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .menu-tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .menu-card-image {
+        height: 180px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1092,7 +412,7 @@
     </div>
   </nav>
 
-  <!-- Overlay para cerrar menú móvil al tocar fuera -->
+  <!-- Overlay para cerrar menú móvil -->
   <div id="mobile-overlay"></div>
 
   <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-pattern">
@@ -1107,7 +427,7 @@
           cupcakes hasta pasteles de boda.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-orange-600 hover:scale-105 transition transform text-center"
+          <a class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-[#c48b8b] hover:scale-105 transition transform text-center"
             href="#menu">
             Ver Menú Completo
           </a>
@@ -1222,292 +542,313 @@
     </div>
   </section>
 
-  <section class="py-20 relative overflow-hidden" id="menu">
-    <div
-      class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none">
-    </div>
+  <!-- ========== NUEVO MENÚ DULCE ========== -->
+  <section class="py-20 bg-white dark:bg-surface-dark relative overflow-hidden" id="menu">
+    <div class="absolute inset-0 opacity-5 pointer-events-none"
+      style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
     <div class="container mx-auto px-6 relative z-10">
+      <!-- Header del Menú -->
       <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white">Nuestro Menú</h2>
-        <p class="text-gray-500 dark:text-gray-400 mt-4 italic">Desliza para cambiar de página</p>
-      </div>
-
-      <!-- Mobile Trigger (Cover Preview) -->
-      <div id="mobile-menu-trigger-wrap" class="md:hidden">
-        <div class="mobile-cover-trigger page-cover shadow-2xl rounded-xl" id="open-menu-mobile">
-          <div class="page-content py-12">
-            <img src="assets/img/logo.png" alt="Logo" class="mx-auto w-32 mb-6">
-            <h2 class="font-display text-3xl font-bold text-white mb-2">Menú Dulce</h2>
-            <p class="text-white/80 text-center">YM Bakery's</p>
-            <div
-              class="mt-8 px-6 py-3 bg-white/20 rounded-full text-white font-bold inline-block animate-pulse mx-auto">
-              <i class="fas fa-hand-pointer mr-2"></i> Toca para abrir el menú
-            </div>
-          </div>
+        <span class="text-primary font-bold uppercase text-sm tracking-wider">Deliciosas Opciones</span>
+        <h2 class="text-4xl md:text-5xl font-display font-bold mt-2 text-gray-900 dark:text-white">Nuestro Menú Dulce
+        </h2>
+        <div class="category-divider">
+          <span>❧</span>
         </div>
+        <p class="text-gray-500 dark:text-gray-400 mt-4 italic max-w-xl mx-auto">
+          Cada postre es preparado con ingredientes frescos y mucho amor. Haz tu pedido y endulza tus momentos.
+        </p>
       </div>
 
-      <!-- Mobile Menu Modal (New Redesign) -->
-
-      <!-- Mobile Menu Modal (Replaced by Flipbook) -->
-      <!-- <div id="mobile-menu-modal">...</div> -->
-
-      <!-- Book Container for Desktop -->
-      <div id="book-container-wrapper" class="book-container relative hidden md:flex">
-        <!-- Close Button (Fullscreen only - not used for new mobile modal but kept for desktop logic) -->
-        <button id="close-menu-btn"
-          class="hidden fixed top-6 right-6 z-[10001] text-white bg-black/50 hover:bg-black/70 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md transition-all">
-          <i class="fas fa-times text-2xl"></i>
+      <!-- Tabs de Navegación -->
+      <div class="menu-tabs mb-10">
+        <button class="menu-tab active" data-category="flanes">
+          <i class="fas fa-cheese mr-2"></i>Flanes
         </button>
+        <button class="menu-tab" data-category="chocoflan">
+          <i class="fas fa-layer-group mr-2"></i>Chocoflan
+        </button>
+        <button class="menu-tab" data-category="brownies">
+          <i class="fas fa-cookie-bite mr-2"></i>Brownies
+        </button>
+        <button class="menu-tab" data-category="tresleches">
+          <i class="fas fa-birthday-cake mr-2"></i>Tres Leches
+        </button>
+        <button class="menu-tab" data-category="galletas">
+          <i class="fas fa-cookie mr-2"></i>Galletas
+        </button>
+      </div>
 
-        <div id="flipbook" class="flip-book shadow-2xl">
-          <!-- Portada de Revista -->
-          <div class="page magazine-cover" data-density="hard">
-            <div class="magazine-cover-content">
-              <img src="assets/img/logo.png" alt="Logo YM Bakery's" class="magazine-cover-logo">
-              <h2 class="magazine-cover-title">Menú Dulce</h2>
-              <p class="magazine-cover-subtitle">YM Bakery's</p>
-              <div class="magazine-cover-edition" style="display:none;"></div>
-            </div>
-          </div>
-
-          <!-- Página 1: Flanes -->
-          <div class="page magazine-page">
-            <div class="page-content">
-              <h2 class="magazine-header">
-                Flanes
-                <span class="magazine-header-line"></span>
-              </h2>
-              <p class="magazine-subtitle">La tradición hecha postre</p>
-
-              <div class="magazine-quote">
-                Cremosos y tradicionales, nuestra receta familiar que ha endulzado generaciones
-              </div>
-
-              <div class="magazine-category">Tradicional</div>
-              <div class="magazine-item">
-                <div>
-                  <span class="magazine-item-name">Porción Individual</span>
-                  <span class="magazine-item-desc">Receta de la abuela</span>
-                </div>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$125.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Tamaño Familiar</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$1,500.00</span>
-              </div>
-
-              <div class="magazine-divider">✦</div>
-
-              <div class="magazine-category">Chocolate</div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Porción Individual</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$150.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Tamaño Familiar</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$1,850.00</span>
-              </div>
-
-              <div class="magazine-image-grid mt-4">
-                <div class="magazine-image-frame">
-                  <img src="assets/img/flan-strawberry.jpg" alt="Flan con fresas">
-                </div>
-                <div class="magazine-image-frame">
-                  <img src="assets/img/flan-containers.jpg" alt="Flanes variados">
-                </div>
-              </div>
-
-              <span class="magazine-page-number left">1</span>
-            </div>
-          </div>
-
-          <!-- Página 2: Chocoflan -->
-          <div class="page magazine-page">
-            <div class="page-content">
-              <h2 class="magazine-header">
-                Chocoflan
-                <span class="magazine-header-line"></span>
-              </h2>
-              <p class="magazine-subtitle">El imposible hecho realidad</p>
-
-              <div class="magazine-image-frame" style="max-width: 280px;">
-                <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan Oreo" style="height: 140px; object-fit: cover;">
-                <p class="magazine-image-caption">Nuestra especialidad de la casa</p>
-              </div>
-
-              <div class="magazine-quote">
-                La combinación perfecta de bizcocho de chocolate y flan cremoso
-              </div>
-
-              <div class="magazine-category">Opciones</div>
-              <div class="magazine-item">
-                <div>
-                  <span class="magazine-item-name">Porción Gourmet</span>
-                  <span class="magazine-item-desc">Presentación individual elegante</span>
-                </div>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$200.00</span>
-              </div>
-              <div class="magazine-item">
-                <div>
-                  <span class="magazine-item-name">Tamaño Completo</span>
-                  <span class="magazine-item-desc">Ideal para 10-12 personas</span>
-                </div>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$2,500.00</span>
-              </div>
-
-              <span class="magazine-page-number right">2</span>
-            </div>
-          </div>
-
-          <!-- Página 3: Brownies -->
-          <div class="page magazine-page">
-            <div class="page-content">
-              <h2 class="magazine-header">
-                Brownies
-                <span class="magazine-header-line"></span>
-              </h2>
-              <p class="magazine-subtitle">Tentación chocolatosa</p>
-
-              <div class="magazine-image-frame" style="max-width: 250px;">
-                <img src="assets/img/brownie-oreo.jpg" alt="Brownie Oreo" style="height: 120px; object-fit: cover;">
-                <p class="magazine-image-caption">Melcochos y deliciosos</p>
-              </div>
-
-              <div class="magazine-category">Sabores</div>
-              <div class="magazine-item">
-                <div>
-                  <span class="magazine-item-name">Brownie de Oreo</span>
-                  <span class="magazine-badge">Popular</span>
-                </div>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$80.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Red Velvet</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$90.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Chocolate Tradicional</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$70.00</span>
-              </div>
-
-              <div class="magazine-quote">
-                La dosis perfecta de chocolate para satisfacer cualquier antojo
-              </div>
-
-              <span class="magazine-page-number left">3</span>
-            </div>
-          </div>
-
-          <!-- Página 4: Tres Leches & Galletas -->
-          <div class="page magazine-page">
-            <div class="page-content">
-              <h2 class="magazine-header">
-                Más Delicias
-                <span class="magazine-header-line"></span>
-              </h2>
-              <p class="magazine-subtitle">Postres que enamoran</p>
-
-              <div class="magazine-category">Tres Leches</div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Tradicional</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$150.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Chocolate</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$180.00</span>
-              </div>
-
-              <div class="magazine-divider">❧</div>
-
-              <div class="magazine-category">Galletas Artesanales</div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Rellena de Dulce de Leche</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$60.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Chispas de Chocolate</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$60.00</span>
-              </div>
-              <div class="magazine-item">
-                <span class="magazine-item-name">Mantequilla Clásica</span>
-                <span class="magazine-item-dots"></span>
-                <span class="magazine-item-price">$50.00</span>
-              </div>
-
-              <div class="magazine-image-grid">
-                <div class="magazine-image-frame">
-                  <img src="assets/img/cookies-powder.jpg" alt="Polvorones">
-                </div>
-                <div class="magazine-image-frame">
-                  <img src="assets/img/alfajores-bag.jpg" alt="Alfajores">
-                </div>
-              </div>
-
-              <span class="magazine-page-number right">4</span>
-            </div>
-          </div>
-
-          <!-- Contraportada -->
-          <div class="page magazine-cover magazine-back-cover" data-density="hard">
-            <div class="magazine-cover-content">
-              <i class="fas fa-heart text-4xl text-white/50 mb-6"></i>
-              <h3 class="magazine-cover-title" style="font-size: 1.8rem;">¡Gracias!</h3>
-              <p class="magazine-cover-subtitle">Por elegirnos para endulzar tus momentos</p>
-
-              <div class="magazine-divider" style="margin: 2rem 0; color: rgba(255,255,255,0.3);">✦ ✦ ✦</div>
-
-              <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                Cada pedido es preparado con ingredientes frescos y mucho amor
-              </p>
-
-              <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
-                <span
-                  style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.6);">Contáctanos</span>
-                <span style="font-size: 1.5rem; font-weight: bold; color: white;">
-                  <i class="fab fa-whatsapp mr-2"></i>829-835-2169
-                </span>
-                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">
-                  <i class="fab fa-instagram mr-1"></i>@ym_bakerys
-                </span>
-              </div>
-            </div>
-          </div>
+      <!-- Categoría: Flanes -->
+      <div class="menu-category active" id="cat-flanes">
+        <div class="category-header">
+          <h3>Flanes Tradicionales</h3>
+          <div class="category-divider"><span>✦</span></div>
+          <p>Cremosos y tradicionales, nuestra receta familiar que ha endulzado generaciones</p>
         </div>
-
-        <!-- Navigation Buttons -->
-        <div class="mt-8 flex justify-center gap-6" id="nav-buttons-container">
-          <button id="prev-page"
-            class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-            <i class="fas fa-arrow-left"></i>
-          </button>
-          <button id="next-page"
-            class="bg-white dark:bg-surface-dark text-primary border-2 border-primary w-12 h-12 rounded-full shadow-lg hover:bg-primary hover:text-white transition flex items-center justify-center">
-            <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <div class="mt-12 text-center">
-          <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#8a4a45] transition shadow-xl hover:scale-105 transform"
-            href="https://wa.me/18298352169" target="_blank">
-            <i class="fab fa-whatsapp"></i> Haz tu pedido ahora
-          </a>
+        <div class="menu-grid">
+          <!-- Flan Tradicional -->
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/flan-strawberry.jpg" alt="Flan Tradicional" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Flan Tradicional</h4>
+              <p class="menu-card-description">Receta de la abuela con caramelo casero. Suave, cremoso y delicioso.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción Individual</span>
+                  <span class="menu-price-value">$125.00</span>
+                </div>
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Tamaño Familiar</span>
+                  <span class="menu-price-value">$1,500.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Flan de Chocolate -->
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/flan-containers.jpg" alt="Flan de Chocolate" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Flan de Chocolate</h4>
+              <p class="menu-card-description">Nuestra receta tradicional con un toque de chocolate premium.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción Individual</span>
+                  <span class="menu-price-value">$150.00</span>
+                </div>
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Tamaño Familiar</span>
+                  <span class="menu-price-value">$1,850.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Categoría: Chocoflan -->
+      <div class="menu-category" id="cat-chocoflan">
+        <div class="category-header">
+          <h3>Chocoflan "El Imposible"</h3>
+          <div class="category-divider"><span>✦</span></div>
+          <p>La combinación perfecta de bizcocho de chocolate y flan cremoso</p>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan Oreo" loading="lazy">
+              <span class="menu-card-badge">Especialidad</span>
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Chocoflan Clásico</h4>
+              <p class="menu-card-description">Nuestra especialidad de la casa. Dos capas mágicas que se invierten
+                durante el horneado.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción Gourmet</span>
+                  <span class="menu-price-value">$200.00</span>
+                </div>
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Tamaño Completo (10-12 personas)</span>
+                  <span class="menu-price-value">$2,500.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/chocoflan-gold.jpg" alt="Chocoflan Dorado" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Chocoflan Dorado</h4>
+              <p class="menu-card-description">Versión premium con caramelo extra dorado y decoración especial.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción Gourmet</span>
+                  <span class="menu-price-value">$220.00</span>
+                </div>
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Tamaño Completo</span>
+                  <span class="menu-price-value">$2,800.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categoría: Brownies -->
+      <div class="menu-category" id="cat-brownies">
+        <div class="category-header">
+          <h3>Brownies Artesanales</h3>
+          <div class="category-divider"><span>✦</span></div>
+          <p>La dosis perfecta de chocolate para satisfacer cualquier antojo</p>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/brownie-oreo.jpg" alt="Brownie de Oreo" loading="lazy">
+              <span class="menu-card-badge">Popular</span>
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Brownie de Oreo</h4>
+              <p class="menu-card-description">Brownie melcochoso con trozos de galleta Oreo y frosting de cream cheese.
+              </p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$80.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/cake-chocolate-oreo.jpg" alt="Brownie Red Velvet" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Brownie Red Velvet</h4>
+              <p class="menu-card-description">Irresistible brownie rojo aterciopelado con swirl de queso crema.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$90.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/chocoflan-cherry.jpg" alt="Brownie Tradicional" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Brownie Tradicional</h4>
+              <p class="menu-card-description">Clásico brownie de chocolate oscuro, denso y súper chocolatoso.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$70.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categoría: Tres Leches -->
+      <div class="menu-category" id="cat-tresleches">
+        <div class="category-header">
+          <h3>Pastel Tres Leches</h3>
+          <div class="category-divider"><span>✦</span></div>
+          <p>El clásico latinoamericano húmedo y esponjoso que todos aman</p>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/cake-blue.jpg" alt="Tres Leches Tradicional" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Tres Leches Tradicional</h4>
+              <p class="menu-card-description">Bizcocho bañado en tres tipos de leche con merengue suave o crema batida.
+              </p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción</span>
+                  <span class="menu-price-value">$150.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/cake-chocolate-oreo.jpg" alt="Tres Leches de Chocolate" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Tres Leches de Chocolate</h4>
+              <p class="menu-card-description">Versión chocolatosa con bizcocho de cacao y crema de chocolate belga.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Porción</span>
+                  <span class="menu-price-value">$180.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categoría: Galletas -->
+      <div class="menu-category" id="cat-galletas">
+        <div class="category-header">
+          <h3>Galletas Artesanales</h3>
+          <div class="category-divider"><span>✦</span></div>
+          <p>Horneadas diariamente con los mejores ingredientes</p>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/cookies-powder.jpg" alt="Polvorones" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Rellena de Dulce de Leche</h4>
+              <p class="menu-card-description">Galleta suave rellena de cremoso dulce de leche argentino.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$60.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/cookies-white.jpg" alt="Galletas de Mantequilla" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Chispas de Chocolate</h4>
+              <p class="menu-card-description">Clásica galleta americana con abundantes chips de chocolate.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$60.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-image">
+              <img src="assets/img/alfajores-bag.jpg" alt="Alfajores" loading="lazy">
+            </div>
+            <div class="menu-card-content">
+              <h4 class="menu-card-title">Mantequilla Clásica</h4>
+              <p class="menu-card-description">Delicada galleta de mantequilla que se deshace en la boca.</p>
+              <div class="menu-card-prices">
+                <div class="menu-price-row">
+                  <span class="menu-price-label">Unidad</span>
+                  <span class="menu-price-value">$50.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de WhatsApp -->
+      <div class="text-center mt-14">
+        <a class="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-[#128C7E] transition shadow-xl hover:scale-105 transform"
+          href="https://wa.me/18298352169" target="_blank">
+          <i class="fab fa-whatsapp text-2xl"></i>
+          Haz tu pedido por WhatsApp
+        </a>
+        <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm">
+          <i class="fas fa-clock mr-1"></i> Tiempo de preparación: 24-48 horas según el pedido
+        </p>
+      </div>
+    </div>
   </section>
 
   <section class="py-20 bg-primary/5 dark:bg-black/20">
@@ -1613,7 +954,7 @@
                 placeholder="¿En qué podemos ayudarte?" rows="4"></textarea>
             </div>
             <button
-              class="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition shadow-lg"
+              class="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-[#c48b8b] transition shadow-lg"
               type="button">
               Enviar Mensaje
             </button>
@@ -1650,22 +991,17 @@
     </div>
   </footer>
 
-  <a class="fixed-whatsapp fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center animate-bounce duration-[2000ms]"
+  <a class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center animate-bounce duration-[2000ms]"
     href="https://wa.me/18298352169" target="_blank">
     <i class="fab fa-whatsapp text-3xl"></i>
   </a>
 
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
   <script>
-    // Page Flip Comprehensive Logic
     document.addEventListener('DOMContentLoaded', () => {
-      let pageFlip = null;
+      // ========== TEMA ==========
       const themeToggleBtn = document.getElementById('theme-toggle');
       const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
 
-      // Theme Logic
       function updateThemeUI() {
         const isDark = document.documentElement.classList.contains('dark');
         const mobileText = themeToggleBtnMobile?.querySelector('span');
@@ -1683,7 +1019,15 @@
       themeToggleBtn?.addEventListener('click', toggleTheme);
       themeToggleBtnMobile?.addEventListener('click', toggleTheme);
 
-      // ========== MENÚ MÓVIL MEJORADO ==========
+      // Cargar tema guardado
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+      updateThemeUI();
+
+      // ========== MENÚ MÓVIL ==========
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
       const mobileOverlay = document.getElementById('mobile-overlay');
 
       function openMobileMenu() {
@@ -1706,7 +1050,6 @@
         icon.classList.add('fa-bars');
       }
 
-      // Toggle al hacer clic en el botón hamburguesa
       mobileMenuBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
         if (mobileMenu.classList.contains('open')) {
@@ -1716,195 +1059,40 @@
         }
       });
 
-      // Cerrar al hacer clic en el overlay
       mobileOverlay?.addEventListener('click', closeMobileMenu);
 
-      // Cerrar al hacer clic en un enlace del menú
       mobileMenu?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          closeMobileMenu();
-        });
+        link.addEventListener('click', closeMobileMenu);
       });
 
-      // Cerrar con tecla Escape
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
           closeMobileMenu();
         }
       });
 
-      // ========== MENÚ REVISTA MÓVIL MEJORADO ==========
-      // Logic replaced by universal Flipbook logic below
+      // ========== TABS DEL MENÚ DULCE ==========
+      const menuTabs = document.querySelectorAll('.menu-tab');
+      const menuCategories = document.querySelectorAll('.menu-category');
 
-      // PageFlip Logic
-      const flipbookEl = document.getElementById('flipbook');
+      menuTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remover active de todos los tabs
+          menuTabs.forEach(t => t.classList.remove('active'));
+          // Agregar active al tab clickeado
+          tab.classList.add('active');
 
-      function initBook() {
-        // If already initialized, do not destroy/re-create aggressively on simple resizes
-        // unless switching between mobile/desktop modes completely changes structure.
-        if (pageFlip) {
-          // If we already have a book instance
-          return;
-        }
+          // Ocultar todas las categorías
+          menuCategories.forEach(cat => cat.classList.remove('active'));
 
-        const isMobile = window.innerWidth < 768;
-        let width = 550;
-        let height = 850; // Increased to prevent cutoff (was 650)
-
-        if (isMobile) {
-          // Mobile dimensions
-          width = Math.min(window.innerWidth * 0.95, 380);
-          height = Math.min(window.innerHeight * 0.85, 600);
-        }
-
-        pageFlip = new St.PageFlip(flipbookEl, {
-          width: width,
-          height: height,
-          size: "stretch",
-          minWidth: 280, maxWidth: 1000,
-          minHeight: 400, maxHeight: 1400,
-          showCover: true,
-          mobileScrollSupport: true,
-          usePortrait: isMobile, // Auto single page for mobile
-          flippingTime: 800,
-          drawShadow: true,
-          showPageCorners: true,
-          disableCanvasShadow: false
-        });
-
-        pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-        const prevPageBtn = document.getElementById("prev-page");
-        const nextPageBtn = document.getElementById("next-page");
-
-        // Remove old listeners to avoid duplicates if re-running
-        const newPrev = prevPageBtn.cloneNode(true);
-        const newNext = nextPageBtn.cloneNode(true);
-        prevPageBtn.parentNode.replaceChild(newPrev, prevPageBtn);
-        nextPageBtn.parentNode.replaceChild(newNext, nextPageBtn);
-
-        newPrev.onclick = () => pageFlip.flipPrev();
-        newNext.onclick = () => pageFlip.flipNext();
-      }
-
-      // Initial load
-      initBook();
-
-      // Handle Resize
-      let resizeTimeout;
-      let wasMobile = window.innerWidth < 768;
-
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          const isNowMobile = window.innerWidth < 768;
-
-          // If we crossed the breakpoint, we MUST re-init to switch between Portrait/Landscape and dimensions
-          if (wasMobile !== isNowMobile) {
-            wasMobile = isNowMobile;
-            if (pageFlip) {
-              pageFlip.destroy();
-              pageFlip = null;
-            }
-
-            // If switching to desktop, clean up fullscreen mode if it was open
-            if (!isNowMobile) {
-              const bookWrapper = document.getElementById('book-container-wrapper');
-              const closeBtn = document.getElementById('close-menu-btn');
-              if (bookWrapper.classList.contains('fullscreen-mode')) {
-                bookWrapper.classList.remove('fullscreen-mode');
-                bookWrapper.className = 'book-container relative hidden md:flex';
-                bookWrapper.style.display = '';
-                closeBtn.classList.remove('visible');
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-              }
-            }
-
-            initBook();
-          } else {
-            // Even if not crossing breakpoint, if we are in desktop mode and resized mostly, 
-            // we might want to ensure dimensions are correct if PageFlip doesn't handle it perfectly.
-            // But usually 'stretch' handles it. 
-            // Exception: If we maximized, sometimes we need to refresh.
-            if (!isNowMobile && pageFlip) {
-              // Optional: Check if dimensions look weird? 
-              // Let's force update just in case for the "disappearing" bug.
-              // Actually destroying and re-creating is safer for the bug.
-              pageFlip.destroy(); // Destroy old instance to clear canvas
-              pageFlip = null;    // Reset var
-              initBook();         // Re-init with new available dimensions
-            }
+          // Mostrar la categoría correspondiente
+          const categoryId = 'cat-' + tab.dataset.category;
+          const targetCategory = document.getElementById(categoryId);
+          if (targetCategory) {
+            targetCategory.classList.add('active');
           }
-        }, 300);
+        });
       });
-
-      // Mobile Trigger for Magazine
-      const mobileTrigger = document.getElementById('open-menu-mobile');
-      const bookWrapper = document.getElementById('book-container-wrapper');
-      const closeBtn = document.getElementById('close-menu-btn');
-
-      if (mobileTrigger) {
-        mobileTrigger.addEventListener('click', () => {
-          // 1. Show the book container in fullscreen
-          bookWrapper.classList.remove('hidden');
-          bookWrapper.classList.add('flex', 'fullscreen-mode');
-          bookWrapper.style.display = 'flex'; // Force flex
-
-          // 2. Show close button
-          closeBtn.classList.add('visible');
-          closeBtn.style.display = 'flex';
-
-          // 3. Lock body scroll
-          document.body.classList.add('modal-open');
-          document.body.style.overflow = 'hidden';
-
-          // 4. Update PageFlip for Mobile dimensions if needed
-          // If pageFlip exists, we might need to update its size or orientation
-          if (pageFlip) {
-            const mWidth = Math.min(window.innerWidth * 0.95, 380);
-            const mHeight = Math.min(window.innerHeight * 0.85, 600);
-            // Unfortunately PageFlip doesn't have a simple updateDimensions method that works perfectly dynamically
-            // for single/double page switch without re-init.
-            // So for mobile switch, we might need to destroy and re-create if it was in desktop mode.
-            if (pageFlip.getOrientation() !== 'portrait') {
-              pageFlip.destroy();
-              pageFlip = null;
-              initBook();
-            }
-          } else {
-            initBook();
-          }
-        });
-      }
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          // Hide everything again
-          bookWrapper.className = 'book-container relative hidden md:flex'; // Reset to default classes
-          bookWrapper.style.display = ''; // Clear inline
-          closeBtn.classList.remove('visible');
-          document.body.classList.remove('modal-open');
-          document.body.style.overflow = '';
-        });
-      }
-
-      // Hint Logic
-      function hideHint() {
-        const overlay = document.getElementById('menu-hint-overlay');
-        if (overlay) {
-          overlay.style.opacity = '0';
-          setTimeout(() => overlay.remove(), 500);
-        }
-      }
-
-      // Observer for hint or other interactions
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) { /* Ready */ }
-        });
-      }, { threshold: 0.1 });
-      observer.observe(document.getElementById('menu'));
     });
   </script>
 </body>
