@@ -182,6 +182,15 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      overflow-y: auto;
+      /* Fallback for small screens */
+      scrollbar-width: none;
+      /* Hide scrollbar Firefox */
+    }
+
+    .page-content::-webkit-scrollbar {
+      display: none;
+      /* Hide scrollbar Chrome/Safari */
     }
 
     /* Lighting overlay for the spine */
@@ -292,88 +301,87 @@
         display: none !important;
       }
 
-      /* Mobile View: Hide inline book by default, show Trigger instead */
-      .book-container.mobile-hidden {
-        display: none !important;
-      }
-
-      /* Fullscreen Modal Mode */
-      .book-container.fullscreen-mode {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #1a1a1a;
-        z-index: 10000;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        padding: 1rem;
-      }
-
-      .book-container.fullscreen-mode #flipbook {
-        margin: auto 0 !important;
-      }
-
-      .book-container.fullscreen-mode #nav-buttons-container {
-        position: absolute;
-        bottom: 5vh;
-        left: 0;
-        right: 0;
-        z-index: 10002;
-        margin: 0 !important;
-      }
-
-      .book-container.fullscreen-mode .mt-12 {
-        display: none !important;
-      }
-
-      /* In Fullscreen, let pages be big and readable */
-      .book-container.fullscreen-mode .page {
-        font-size: 0.85rem !important;
-        padding: 1rem !important;
-        box-shadow: none !important;
-        border: none !important;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .book-container.fullscreen-mode .page-header {
-        font-size: 1.25rem !important;
-        margin-bottom: 1rem !important;
-      }
-
-      .book-container.fullscreen-mode .page img {
-        object-fit: contain !important;
-        max-height: 140px !important;
-        margin: 0.25rem auto !important;
-        width: auto !important;
-      }
-
-      .book-container.fullscreen-mode .space-y-6>*+* {
-        margin-top: 0.75rem !important;
-      }
-
-      .book-container.fullscreen-mode .space-y-4>*+* {
-        margin-top: 0.5rem !important;
-      }
-
-      .book-container.fullscreen-mode #flipbook {
-        max-width: 100%;
-        max-height: 80vh;
-      }
-
-      body.modal-open .fixed-whatsapp {
-        display: none !important;
-      }
-
       /* Mobile Trigger Button Styles */
       .mobile-menu-trigger {
         display: none;
       }
+    }
+
+    /* FULLSCREEN MODE STYLES (Global) */
+    .book-container.fullscreen-mode {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #1a1a1a;
+      z-index: 10000;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    .book-container.fullscreen-mode #flipbook {
+      margin: auto 0 !important;
+      max-width: 100%;
+      max-height: 80vh;
+    }
+
+    .book-container.fullscreen-mode #nav-buttons-container {
+      position: absolute;
+      bottom: 5vh;
+      left: 0;
+      right: 0;
+      z-index: 10002;
+      margin: 0 !important;
+      pointer-events: none;
+      /* Let clicks pass through container */
+    }
+
+    .book-container.fullscreen-mode #nav-buttons-container button {
+      pointer-events: auto;
+      /* Re-enable pointer events for buttons */
+    }
+
+    .book-container.fullscreen-mode .mt-12 {
+      display: none !important;
+    }
+
+    .book-container.fullscreen-mode .page {
+      font-size: 0.85rem !important;
+      padding: 1rem !important;
+      box-shadow: none !important;
+      border: none !important;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-container.fullscreen-mode .page-header {
+      font-size: 1.25rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    .book-container.fullscreen-mode .page img {
+      object-fit: contain !important;
+      max-height: 140px !important;
+      margin: 0.25rem auto !important;
+      width: auto !important;
+    }
+
+    .book-container.fullscreen-mode .space-y-6>*+* {
+      margin-top: 0.75rem !important;
+    }
+
+    .book-container.fullscreen-mode .space-y-4>*+* {
+      margin-top: 0.5rem !important;
+    }
+
+
+    body.modal-open .fixed-whatsapp {
+      display: none !important;
     }
 
     /* Default Mobile rules for pages (when not fullscreen) */
@@ -1241,122 +1249,8 @@
 
       <!-- Mobile Menu Modal (New Redesign) -->
 
-      <div id="mobile-menu-modal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-custom items-center justify-center p-4">
-        <main
-          class="w-full h-[85vh] max-h-[800px] bg-bakery-cream bg-parchment flex flex-col rounded-3xl overflow-hidden shadow-2xl relative max-w-[400px]">
-          <!-- Top Bar -->
-          <div class="h-10 bg-bakery-rose flex items-center justify-end px-4">
-            <button id="close-modal-mobile" class="text-white hover:text-gray-200 transition-colors">
-              <i class="fas fa-times-circle text-xl"></i>
-            </button>
-          </div>
-
-          <!-- Navigation Strip -->
-          <nav class="border-b border-bakery-rose/20 py-2 px-2 overflow-x-auto whitespace-nowrap bg-bakery-card-bg">
-            <ul class="flex justify-start space-x-4 text-[11px] font-sans text-bakery-brown font-bold tracking-wide">
-              <li><a class="hover:text-bakery-rose border-b-2 border-bakery-rose pb-0.5" href="#home">Inicio</a></li>
-              <li><a class="hover:text-bakery-rose" href="#flanes">Flanes</a></li>
-              <li><a class="hover:text-bakery-rose" href="#chocoflan">Chocoflan</a></li>
-              <li><a class="hover:text-bakery-rose" href="#brownies">Brownies</a></li>
-              <li><a class="hover:text-bakery-rose" href="#cookies">Galletas</a></li>
-            </ul>
-          </nav>
-
-          <!-- Scrollable Content -->
-          <div class="flex-1 overflow-y-auto custom-scrollbar p-5">
-            <header class="text-center mb-8 mt-2">
-              <h1 class="font-serif text-2xl text-bakery-brown leading-tight font-bold">
-                MENÚ DULCE<br />
-                <span class="text-3xl text-bakery-rose">YM BAKERY'S</span>
-              </h1>
-            </header>
-
-            <!-- Hero Section -->
-            <section class="mb-10 text-center relative">
-              <div class="rounded-2xl overflow-hidden shadow-lg mb-4">
-                <img src="assets/img/hero-image.jpg" alt="YM Bakery Hero" class="w-full object-cover h-[200px]">
-              </div>
-              <h2 class="font-serif text-xl text-bakery-brown mb-2 font-bold italic">Nuestras Delicias</h2>
-              <p class="font-sans text-xs text-bakery-brown/80 mb-5 px-2 leading-relaxed">
-                Elaborados con ingredientes frescos y mucho amor, una explosión de sabor en cada bocado.
-              </p>
-              <a href="https://wa.me/18298352169" target="_blank"
-                class="bg-bakery-rose text-white text-[10px] font-bold py-2 px-8 rounded-full uppercase tracking-wider hover:bg-bakery-rose-dark transition-colors shadow-md inline-block">
-                Haz tu pedido
-              </a>
-            </section>
-
-            <!-- Product List -->
-            <div class="space-y-6">
-              <!-- Item 1: Flanes -->
-              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
-                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
-                  <img src="assets/img/flan-strawberry.jpg" alt="Flanes"
-                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
-                </div>
-                <div class="flex-1 flex flex-col justify-center">
-                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Flanes Caseros</h3>
-                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
-                    Tradicionales y cremosos, la receta de la abuela en tu mesa.
-                  </p>
-                  <span class="text-bakery-rose font-bold text-xs">Desde $125.00</span>
-                </div>
-              </article>
-
-              <!-- Item 2: Chocoflan -->
-              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
-                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
-                  <img src="assets/img/chocoflan-oreo.jpg" alt="Chocoflan"
-                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
-                </div>
-                <div class="flex-1 flex flex-col justify-center">
-                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Chocoflan Oreo</h3>
-                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
-                    La combinación perfecta de bizcocho de chocolate y flan.
-                  </p>
-                  <span class="text-bakery-rose font-bold text-xs">Desde $200.00</span>
-                </div>
-              </article>
-
-              <!-- Item 3: Brownies -->
-              <article class="rounded-2xl p-4 flex items-center shadow-sm bg-[#fae1e1]">
-                <div class="w-1/3 h-28 flex-shrink-0 mr-4">
-                  <img src="assets/img/brownie-oreo.jpg" alt="Brownies"
-                    class="w-full h-full object-cover rounded-xl shadow-sm bg-white">
-                </div>
-                <div class="flex-1 flex flex-col justify-center">
-                  <h3 class="font-serif text-lg text-bakery-brown font-bold mb-1 italic">Brownies Melcochos</h3>
-                  <p class="font-sans text-[10px] text-bakery-brown/90 mb-3 leading-tight font-medium">
-                    Oreo, Red Velvet y más. La dosis perfecta de chocolate.
-                  </p>
-                  <span class="text-bakery-rose font-bold text-xs">Desde $80.00</span>
-                </div>
-              </article>
-            </div>
-
-            <div class="h-8"></div>
-          </div>
-
-          <!-- Bottom Footer -->
-          <footer class="bg-bakery-rose h-16 flex items-center justify-around px-4 shadow-inner">
-            <button class="flex flex-col items-center text-white/90 hover:text-white transition">
-              <i class="fas fa-search text-lg mb-1"></i>
-              <span class="text-[10px] font-sans">Buscar</span>
-            </button>
-            <a href="https://wa.me/18298352169"
-              class="flex flex-col items-center text-white/90 hover:text-white transition">
-              <i class="fab fa-whatsapp text-xl mb-1"></i>
-              <span class="text-[10px] font-sans">WhatsApp</span>
-            </a>
-            <a href="https://www.instagram.com/ym_bakerys"
-              class="flex flex-col items-center text-white/90 hover:text-white transition">
-              <i class="fab fa-instagram text-lg mb-1"></i>
-              <span class="text-[10px] font-sans">Instagram</span>
-            </a>
-          </footer>
-        </main>
-      </div>
+      <!-- Mobile Menu Modal (Replaced by Flipbook) -->
+      <!-- <div id="mobile-menu-modal">...</div> -->
 
       <!-- Book Container for Desktop -->
       <div id="book-container-wrapper" class="book-container relative hidden md:flex">
@@ -1373,7 +1267,7 @@
               <img src="assets/img/logo.png" alt="Logo YM Bakery's" class="magazine-cover-logo">
               <h2 class="magazine-cover-title">Menú Dulce</h2>
               <p class="magazine-cover-subtitle">YM Bakery's</p>
-              <div class="magazine-cover-edition">Edición 2025 • Cotuí, RD</div>
+              <div class="magazine-cover-edition" style="display:none;"></div>
             </div>
           </div>
 
@@ -1840,78 +1734,39 @@
       });
 
       // ========== MENÚ REVISTA MÓVIL MEJORADO ==========
-      const mobileTrigger = document.getElementById('open-menu-mobile');
-      const mobileModal = document.getElementById('mobile-menu-modal');
-      const closeModalMobile = document.getElementById('close-modal-mobile');
-      const bookWrapper = document.getElementById('book-container-wrapper');
-      const closeBtn = document.getElementById('close-menu-btn');
-
-      function openMenuModal() {
-        // En móvil usamos el modal de lista (más fluido)
-        mobileModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeMenuModal() {
-        mobileModal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      // Abrir menú al tocar la portada
-      mobileTrigger?.addEventListener('click', openMenuModal);
-
-      // Cerrar con botón X
-      closeModalMobile?.addEventListener('click', closeMenuModal);
-
-      // Cerrar al tocar el fondo oscuro (fuera del modal)
-      mobileModal?.addEventListener('click', (e) => {
-        if (e.target === mobileModal) {
-          closeMenuModal();
-        }
-      });
-
-      // Cerrar con tecla Escape (también para este modal)
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileModal?.classList.contains('active')) {
-          closeMenuModal();
-        }
-      });
-
-      // Lógica del libro flip para ESCRITORIO solamente
-      closeBtn?.addEventListener('click', () => {
-        bookWrapper.classList.remove('fullscreen-mode');
-        closeBtn.classList.remove('visible');
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-      });
+      // Logic replaced by universal Flipbook logic below
 
       // PageFlip Logic
       const flipbookEl = document.getElementById('flipbook');
 
       function initBook() {
-        if (pageFlip) pageFlip.destroy();
+        // If already initialized, do not destroy/re-create aggressively on simple resizes
+        // unless switching between mobile/desktop modes completely changes structure.
+        if (pageFlip) {
+          // If we already have a book instance
+          return;
+        }
 
         const isMobile = window.innerWidth < 768;
-        let width = 500;
-        let height = 650;
+        let width = 550;
+        let height = 850; // Increased to prevent cutoff (was 650)
 
         if (isMobile) {
-          // Usar el 90% del ancho de la ventana o 340px
-          width = Math.min(window.innerWidth * 0.9, 340);
-          // Altura proporcional para que no se corte arriba/abajo
-          height = Math.min(window.innerHeight * 0.75, 520);
+          // Mobile dimensions
+          width = Math.min(window.innerWidth * 0.95, 380);
+          height = Math.min(window.innerHeight * 0.85, 600);
         }
 
         pageFlip = new St.PageFlip(flipbookEl, {
           width: width,
           height: height,
           size: "stretch",
-          minWidth: 260, maxWidth: 1000,
-          minHeight: 350, maxHeight: 1200,
+          minWidth: 280, maxWidth: 1000,
+          minHeight: 400, maxHeight: 1400,
           showCover: true,
           mobileScrollSupport: true,
-          usePortrait: isMobile,
-          flippingTime: 600,
+          usePortrait: isMobile, // Auto single page for mobile
+          flippingTime: 800,
           drawShadow: true,
           showPageCorners: true,
           disableCanvasShadow: false
@@ -1921,25 +1776,118 @@
 
         const prevPageBtn = document.getElementById("prev-page");
         const nextPageBtn = document.getElementById("next-page");
-        if (prevPageBtn) prevPageBtn.onclick = () => pageFlip.flipPrev();
-        if (nextPageBtn) nextPageBtn.onclick = () => pageFlip.flipNext();
+
+        // Remove old listeners to avoid duplicates if re-running
+        const newPrev = prevPageBtn.cloneNode(true);
+        const newNext = nextPageBtn.cloneNode(true);
+        prevPageBtn.parentNode.replaceChild(newPrev, prevPageBtn);
+        nextPageBtn.parentNode.replaceChild(newNext, nextPageBtn);
+
+        newPrev.onclick = () => pageFlip.flipPrev();
+        newNext.onclick = () => pageFlip.flipNext();
       }
 
-      // Inicializar en desktop por defecto
-      if (window.innerWidth >= 768) {
-        initBook();
-      }
+      // Initial load
+      initBook();
 
-      // Manejar cambios de orientación/redimensionado
+      // Handle Resize
       let resizeTimeout;
+      let wasMobile = window.innerWidth < 768;
+
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-          if (document.body.classList.contains('modal-open') || window.innerWidth >= 768) {
+          const isNowMobile = window.innerWidth < 768;
+
+          // If we crossed the breakpoint, we MUST re-init to switch between Portrait/Landscape and dimensions
+          if (wasMobile !== isNowMobile) {
+            wasMobile = isNowMobile;
+            if (pageFlip) {
+              pageFlip.destroy();
+              pageFlip = null;
+            }
+
+            // If switching to desktop, clean up fullscreen mode if it was open
+            if (!isNowMobile) {
+              const bookWrapper = document.getElementById('book-container-wrapper');
+              const closeBtn = document.getElementById('close-menu-btn');
+              if (bookWrapper.classList.contains('fullscreen-mode')) {
+                bookWrapper.classList.remove('fullscreen-mode');
+                bookWrapper.className = 'book-container relative hidden md:flex';
+                bookWrapper.style.display = '';
+                closeBtn.classList.remove('visible');
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+              }
+            }
+
             initBook();
+          } else {
+            // Even if not crossing breakpoint, if we are in desktop mode and resized mostly, 
+            // we might want to ensure dimensions are correct if PageFlip doesn't handle it perfectly.
+            // But usually 'stretch' handles it. 
+            // Exception: If we maximized, sometimes we need to refresh.
+            if (!isNowMobile && pageFlip) {
+              // Optional: Check if dimensions look weird? 
+              // Let's force update just in case for the "disappearing" bug.
+              // Actually destroying and re-creating is safer for the bug.
+              pageFlip.destroy(); // Destroy old instance to clear canvas
+              pageFlip = null;    // Reset var
+              initBook();         // Re-init with new available dimensions
+            }
           }
         }, 300);
       });
+
+      // Mobile Trigger for Magazine
+      const mobileTrigger = document.getElementById('open-menu-mobile');
+      const bookWrapper = document.getElementById('book-container-wrapper');
+      const closeBtn = document.getElementById('close-menu-btn');
+
+      if (mobileTrigger) {
+        mobileTrigger.addEventListener('click', () => {
+          // 1. Show the book container in fullscreen
+          bookWrapper.classList.remove('hidden');
+          bookWrapper.classList.add('flex', 'fullscreen-mode');
+          bookWrapper.style.display = 'flex'; // Force flex
+
+          // 2. Show close button
+          closeBtn.classList.add('visible');
+          closeBtn.style.display = 'flex';
+
+          // 3. Lock body scroll
+          document.body.classList.add('modal-open');
+          document.body.style.overflow = 'hidden';
+
+          // 4. Update PageFlip for Mobile dimensions if needed
+          // If pageFlip exists, we might need to update its size or orientation
+          if (pageFlip) {
+            const mWidth = Math.min(window.innerWidth * 0.95, 380);
+            const mHeight = Math.min(window.innerHeight * 0.85, 600);
+            // Unfortunately PageFlip doesn't have a simple updateDimensions method that works perfectly dynamically
+            // for single/double page switch without re-init.
+            // So for mobile switch, we might need to destroy and re-create if it was in desktop mode.
+            if (pageFlip.getOrientation() !== 'portrait') {
+              pageFlip.destroy();
+              pageFlip = null;
+              initBook();
+            }
+          } else {
+            initBook();
+          }
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          // Hide everything again
+          bookWrapper.className = 'book-container relative hidden md:flex'; // Reset to default classes
+          bookWrapper.style.display = ''; // Clear inline
+          closeBtn.classList.remove('visible');
+          document.body.classList.remove('modal-open');
+          document.body.style.overflow = '';
+        });
+      }
 
       // Hint Logic
       function hideHint() {
